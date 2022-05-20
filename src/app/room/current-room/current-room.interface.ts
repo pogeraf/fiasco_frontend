@@ -23,14 +23,16 @@ export interface ICreatedItem extends IItem {
 
 export interface IDice extends IItem {
   d: number;
-  value: number;
   styles: IStyles;
+  value: number;
 }
 
 export interface IDiceCreated extends IDice, ICreatedItem {}
 
 export interface ISit extends IItem {}
-export interface IText extends IItem {}
+export interface IText extends IItem {
+  value: string;
+}
 
 export interface ICurrentRoom extends IRoom {
   users: { [id: string]: IUserInRoom };

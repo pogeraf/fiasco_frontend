@@ -1,8 +1,27 @@
 <form
-  class="create_element_form"
+  class="create_element_form creating-text-form"
   [class]="isCreating ? 'show' : 'hidden'"
+  [formGroup]="textForm"
+  (submit)="createElementEvent()"
 >
-  <section [class]="isCreating ? 'show' : 'hidden'" class="creating-dice-form__fake-dice">
-     <p>Creating text</p>
+  <section [class]="isCreating ? 'show' : 'hidden'" class="creating-text-form__fake-text-block">
+    <div title="Cart with text that is created" class="creating-text-form__header">Cart with text that is created</div>
+    <div class="creating-text-form__fake-text-block_block" title="Cart with text that is created" [style]="">
+      <span>{{textForm.value.text}}</span>
+    </div>
   </section >
+
+  <section [class]="isCreating ? 'show' : 'hidden'" class="creating-text-form__text">
+    <span class="creating-text-form__header">Text:</span>
+    <textarea type="number" formControlName="text"></textarea>
+  </section>
+  <section [class]="isCreating ? 'show' : 'hidden'" class="creating-text-form__type">
+    <p *ngFor="let type of ['default', 'custom']">
+      <input formControlName="blockType" name="blockType" [value]="type" type="radio">
+      <span>{{type}}</span>
+    </p>
+    <button type="submit" class="button-1">Create!</button>
+  </section>
+
+  <div *ngIf="textForm.value.blockType === 'custom'" class="creating-text-form__devtools">COMING SOON</div>
 </form>

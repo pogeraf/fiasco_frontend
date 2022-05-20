@@ -10,6 +10,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CreateDiceFormComponent } from './create-element-sidebar/create-dice-form/create-dice-form.component';
 import { CreateTextFormComponent } from './create-element-sidebar/create-text-form/create-text-form.component';
 import { CreateSitFormComponent } from './create-element-sidebar/create-sit-form/create-sit-form.component';
+import { CardWithTextComponent } from './card-with-text/card-with-text.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { CreateSitFormComponent } from './create-element-sidebar/create-sit-form
     CreateDiceFormComponent,
     CreateTextFormComponent,
     CreateSitFormComponent,
+    CardWithTextComponent,
   ],
   imports: [CommonModule, RouterModule, ReactiveFormsModule],
 })

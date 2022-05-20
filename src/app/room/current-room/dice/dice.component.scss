@@ -3,6 +3,7 @@
   height: 24px;
   position: absolute;
 
+  cursor: grab;
   user-select: none;
 
   &__value {
@@ -20,7 +21,7 @@
     height: 20px;
 
     position: absolute;
-    bottom: -20px;
+    bottom: -23px;
     left: 5px;
 
     font-size: 10px;

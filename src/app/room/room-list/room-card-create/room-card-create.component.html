@@ -11,10 +11,10 @@
   <div class="room-card-creating__name">
     <input [style.background-color]="styleService.colorArrayToStr(newCard.styles.name.bg.color)" type="text" [(ngModel)]="newCard.name">
   </div>
-  <div class="room-card-creating__members"> {{ newCard.usersInRoom }}/<input type="number"
-                                                                             [(ngModel)]="newCard.maxUsers">
-  </div>
-  <button (click)="create()" class="room-card-creating__create button-1">Create</button>
+<!--  <div class="room-card-creating__members"> {{ newCard.usersInRoom }}/<input type="number"-->
+<!--                                                                             [(ngModel)]="newCard.maxUsers">-->
+<!--  </div>-->
+  <button (click)="create()" class="room-card-creating__create button-1">Join</button>
   <button (click)="cancel()" class="room-card-creating__cancel button-1">Cancel</button>
   <button class="room-card-creating__dev">Devtools</button>
   <button (click)="generate()" class="room-card-creating__random">Random</button>

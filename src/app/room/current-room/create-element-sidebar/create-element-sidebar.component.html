@@ -6,6 +6,7 @@
       *ngFor="let item of elementTypes"
       (click)="startCreating(item)"
     >Create {{item}}</p>
+<!--    <button class="sidebar__element left button-1" routerLink="/">Back to List</button>-->
   </div>
 
   <div
@@ -13,9 +14,9 @@
   >
     <app-create-dice-form
       [isCreating]="isCreating === 'dice'"
-      (createDice)="createElementEvent('dice', $event)"
+      (createElement)="createElementEvent('dice', $event)"
     ></app-create-dice-form>
-    <app-create-text-form [isCreating]="isCreating === 'text'"></app-create-text-form>
-    <app-create-sit-form [isCreating]="isCreating === 'sit'"></app-create-sit-form>
+    <app-create-text-form (createElement)="createElementEvent('text', $event)" [isCreating]="isCreating === 'text'"></app-create-text-form>
+    <app-create-sit-form (createElement)="createElementEvent('sit', $event)" [isCreating]="isCreating === 'sit'"></app-create-sit-form>
   </div>
 </div>

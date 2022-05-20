@@ -11,7 +11,7 @@ import { StyleService } from '../../../../services/color/style.service';
 })
 export class CreateDiceFormComponent implements OnInit {
   @Input() isCreating: boolean;
-  @Output() createDice = new EventEmitter<IDice>();
+  @Output() createElement = new EventEmitter<IDice>();
 
   diceForm: FormGroup = new FormGroup({
     type: new FormControl('', Validators.required),
@@ -64,7 +64,7 @@ export class CreateDiceFormComponent implements OnInit {
   }
 
   createDiceEvent() {
-    this.createDice.emit({
+    this.createElement.emit({
       ...this.diceByType,
       d: this.diceForm.value.d,
       value: this.diceService.generateRandoValueForDice(this.diceForm.value.d),

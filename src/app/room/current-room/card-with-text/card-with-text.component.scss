@@ -1,0 +1,53 @@
+.block-with-text {
+  width: 150px;
+  height: 65px;
+
+  position: absolute;
+
+  border: 2px solid;
+
+  line-height: 12px;
+  cursor: grab;
+  user-select: none;
+
+
+  span {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 12px;
+    word-wrap: break-word;
+
+    &::-webkit-scrollbar {
+      width: 4px;
+      height: 4px;
+    }
+    &::-webkit-scrollbar-track {
+      box-shadow: inset 0 0 5px grey;
+    }
+    &::-webkit-scrollbar-thumb {
+      background: black;
+    }
+
+    overflow: auto;
+  }
+
+  &__creator-name-label {
+    width: 50%;
+    height: 20px;
+
+    position: absolute;
+    bottom: -35%;
+    right: -30%;
+
+    font-size: 10px;
+    color: black;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}

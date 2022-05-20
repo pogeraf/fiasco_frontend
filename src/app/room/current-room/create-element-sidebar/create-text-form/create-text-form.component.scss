@@ -1,0 +1,124 @@
+.creating-text-form {
+  display: flex;
+
+  &__header {
+    font-size: 10px;
+    font-style: italic;
+    text-align: center;
+  }
+
+  &__fake-text-block {
+    width: 200px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+
+    &:after {
+      display: block;
+      position: absolute;
+      left: 200px;
+      top: 30px;
+      width: 3px;
+      height: 100px;
+      background: rgb(0,0,0);
+      content: "";
+      transition: .2s height;
+    }
+
+    &_block {
+      width: 150px;
+      height: 65px;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      word-wrap: break-word;
+
+      border: 2px solid;
+      overflow: auto;
+      cursor: not-allowed;
+
+      line-height: 12px;
+
+      &::-webkit-scrollbar {
+        width: 4px;
+        height: 4px;
+      }
+      &::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 5px grey;
+      }
+      &::-webkit-scrollbar-thumb {
+        background: black;
+      }
+
+      span {
+        font-size: 12px;
+        word-wrap: break-word;
+      }
+    }
+  }
+
+  &__text {
+    margin: 0 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+
+    textarea {
+      width: 150px;
+      height: 70px;
+
+      border: 2px solid black;
+
+      font-size: 12px;
+      resize: none;
+    }
+    span {
+      text-align: left;
+    }
+  }
+
+  &__type {
+    display: flex;
+    flex-direction: column;
+
+    font-size: 14px;
+    text-transform: uppercase;
+
+    p {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+
+      span {
+        padding: 0 5px;
+      }
+    }
+
+    button[type = 'submit'] {
+      text-align: center;
+      width: 80px;
+      height: 25px;
+      border: solid;
+
+      transition-delay: unset;
+      &:hover {
+        background: lightgreen !important;
+        color: rgba(100, 100, 100) !important;
+      }
+    }
+  }
+
+  &__devtools {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 40px;
+    font-style: italic;
+  }
+}
+

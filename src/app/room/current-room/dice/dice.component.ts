@@ -25,8 +25,6 @@ export class DiceComponent implements OnInit {
 
   public get diceStyle(): IDiceStyle {
     const style = this.dice.styles;
-    console.log(this.dice.coordinates);
-    console.log(this.dice);
     return {
       left: this.dice.coordinates[0] + 'px',
       top: this.dice.coordinates[1] + 'px',

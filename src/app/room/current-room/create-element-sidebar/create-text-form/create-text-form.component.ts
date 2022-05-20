@@ -1,4 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { IText } from '../../current-room.interface';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { TextareaService } from '../../../../services/textarea/textarea.service';
 
 @Component({
   selector: 'app-create-text-form',
@@ -7,8 +10,25 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class CreateTextFormComponent implements OnInit {
   @Input() isCreating: boolean;
+  @Output() createElement = new EventEmitter<IText>();
 
-  constructor() {}
+  textForm: FormGroup = new FormGroup({
+    text: new FormControl('', Validators.required),
+    blockType: new FormControl('default', Validators.required),
+    style: new FormControl(''),
+  });
+
+  constructor(private textareaService: TextareaService) {}
 
   ngOnInit(): void {}
+
+  createElementEvent() {
+    this.createElement.emit(
+      this.textareaService.defaultTextElement({
+        coordinates: [15, 150],
+        text: this.textForm.value.text,
+      })
+    );
+    this.textForm.reset({ blockType: 'default' });
+  }
 }

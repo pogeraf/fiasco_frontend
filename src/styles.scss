@@ -11,6 +11,10 @@ button {
   cursor: pointer;
 }
 
+input[type='radio'] {
+  cursor: pointer;
+}
+
 .room-card {
   width: 250px;
   height: 250px;
@@ -83,11 +87,13 @@ input[type=number] {
 }
 
 .create_element_form {
+  padding: 10px 0;
+  overflow-x: auto;
+
   &.hidden {
     height: 0;
     padding: 0;
   }
-  padding: 15px 0;
 
   .show {
     .creating-dice-form__fake-dice_dice span {

@@ -25,6 +25,7 @@ import {
   styleUrls: ['./current-room.component.scss'],
 })
 export class CurrentRoomComponent implements OnInit, OnDestroy {
+  // @ViewChild(adDirective) elements;
   public name: string = '';
   public currentRoom: ICurrentRoom = {
     items: {},
@@ -137,8 +138,6 @@ export class CurrentRoomComponent implements OnInit, OnDestroy {
       e.clientX - 10,
       e.clientY - 10,
     ];
-    console.log('ELEMENT: ', this.currentRoom.items[this.isMoving].coordinates);
-    console.log('DICE: ', this.currentRoom.items[this.isMoving]);
   }
 
   public startMovingElementById(id: string) {

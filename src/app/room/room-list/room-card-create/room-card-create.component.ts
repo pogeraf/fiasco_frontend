@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { StyleService } from '../../../services/color/style.service';
 import { IRoomCard } from '../room-list.interface';
 import { RoomListService } from '../../../services/room-list/room-list.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-room-card-create',
@@ -15,7 +16,8 @@ export class RoomCardCreateComponent implements OnInit {
 
   constructor(
     public styleService: StyleService,
-    private roomListService: RoomListService
+    private roomListService: RoomListService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -40,16 +42,17 @@ export class RoomCardCreateComponent implements OnInit {
     this.isCreating = false;
   }
   public create(): void {
-    if (this.validator) {
-      this.roomListService.addRoomCard(
-        JSON.parse(JSON.stringify(this.newCard))
-      );
-      this.initNewCard();
-      this.isCreating = false;
+    if (!this.isValid) {
+      return;
     }
+
+    this.router.navigate([`/room/id/${this.newCard.name}`]);
+    this.roomListService.addRoomCard(JSON.parse(JSON.stringify(this.newCard)));
+    this.initNewCard();
+    this.isCreating = false;
   }
 
-  private get validator(): boolean {
+  private get isValid(): boolean {
     if (this.devMod) {
       return true;
     } else {
