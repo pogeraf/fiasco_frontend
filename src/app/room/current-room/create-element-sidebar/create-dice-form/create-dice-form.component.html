@@ -1,0 +1,30 @@
+<form
+  class="create_element_form creating-dice-form"
+  [class]="isCreating ? 'show' : 'hidden'"
+  [formGroup]="diceForm"
+  (submit)="createDiceEvent()"
+>
+  <section [class]="isCreating ? 'show' : 'hidden'" class="creating-dice-form__fake-dice">
+    <p title="Dice that is created" class="creating-dice-form__fake-dice_header">Dice that is created</p>
+    <div class="creating-dice-form__fake-dice_dice" title="Dice that is created" [style]="diceStyle">
+      <span>{{diceByType.value}}</span>
+      <p>Label</p>
+    </div>
+  </section >
+  <section [class]="isCreating ? 'show' : 'hidden'" class="creating-dice-form__d">
+    <p class="">
+      <span>d: </span>
+      <input type="number" formControlName="d">
+    </p>
+    <button type="submit" class="button-1">Create!</button>
+  </section>
+
+  <section [class]="isCreating ? 'show' : 'hidden'" class="creating-dice-form__type">
+    <p *ngFor="let type of ['white', 'black', 'random', 'custom']">
+      <input formControlName="diceType" name="diceType" [value]="type" type="radio">
+      <span>{{type}}</span>
+    </p>
+  </section>
+
+  <div *ngIf="diceForm.value.diceType === 'custom'" class="creating-dice-form__devtools">COMING SOON</div>
+</form>

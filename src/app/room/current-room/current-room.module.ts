@@ -7,6 +7,9 @@ import { CreateElementSidebarComponent } from './create-element-sidebar/create-e
 import { UsersListComponent } from './users-list/users-list.component';
 import { ContextMenuComponent } from './context-menu/context-menu.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CreateDiceFormComponent } from './create-element-sidebar/create-dice-form/create-dice-form.component';
+import { CreateTextFormComponent } from './create-element-sidebar/create-text-form/create-text-form.component';
+import { CreateSitFormComponent } from './create-element-sidebar/create-sit-form/create-sit-form.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +18,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     CreateElementSidebarComponent,
     UsersListComponent,
     ContextMenuComponent,
+    CreateDiceFormComponent,
+    CreateTextFormComponent,
+    CreateSitFormComponent,
   ],
   imports: [CommonModule, RouterModule, ReactiveFormsModule],
 })
