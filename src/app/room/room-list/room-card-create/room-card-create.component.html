@@ -1,0 +1,28 @@
+<div
+  *ngIf="isCreating; else mask"
+  class="room-card room-card-creating"
+  [style.background]="styleService.colorArrayToStr(newCard.styles.bg.color)"
+  [style.background-image]="newCard.styles.bg?.url ? 'url(\'' + newCard.styles.bg?.url + '\')': ''"
+  [style.border]="newCard.styles.border.type + ' ' + styleService.colorArrayToStr(newCard.styles.border.color) + ' ' + styleService.sizeToStr(newCard.styles.border.size)"
+  [style.border-radius]="styleService.sizeToStr(newCard.styles.border.radius)"
+  [style.font-size]="styleService.sizeToStr(newCard.styles.font.size)"
+  [style.font-colot]="styleService.colorArrayToStr(newCard.styles.font.color)"
+>
+  <div class="room-card-creating__name">
+    <input [style.background-color]="styleService.colorArrayToStr(newCard.styles.name.bg.color)" type="text" [(ngModel)]="newCard.name">
+  </div>
+  <div class="room-card-creating__members"> {{ newCard.usersInRoom }}/<input type="number"
+                                                                             [(ngModel)]="newCard.maxUsers">
+  </div>
+  <button (click)="create()" class="room-card-creating__create button-1">Create</button>
+  <button (click)="cancel()" class="room-card-creating__cancel button-1">Cancel</button>
+  <button class="room-card-creating__dev">Devtools</button>
+  <button (click)="generate()" class="room-card-creating__random">Random</button>
+</div>
+
+<ng-template #mask>
+  <div
+    (click)="isCreating = !isCreating"
+    class="room-card room-card-mask"
+  >+</div>
+</ng-template>

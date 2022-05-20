@@ -1,0 +1,48 @@
+<div class="sidebar" [class]="isCreating ? 'is-creating' : ''">
+  <div class="sidebar__element-list">
+    <p
+      class="sidebar__element button-1"
+      [class]="isCreating === item ? 'is-creating' : ''"
+      *ngFor="let item of elementTypes"
+      (click)="startCreating(item)"
+    >Create {{item}}</p>
+  </div>
+
+  <form
+    class="sidebar__creating-dice"
+    [formGroup]="diceForm"
+    (submit)="createElementEvent('dice')"
+  >
+    <section [class]="isCreating === 'dice' ? 'show' : 'hidden'" class="sidebar__creating-dice_face-dice">
+      <p title="Dice that is created" class="sidebar__creating-dice_face-dice_header">Dice that is created</p>
+      <div class="sidebar__creating-dice_face-dice_dice" title="Dice that is created" [style]="diceStyle">
+        <span>{{diceByType.value}}</span>
+        <p>Label</p>
+      </div>
+    </section>
+    <section [class]="isCreating === 'dice' ? 'show' : 'hidden'" class="sidebar__creating-dice_d">
+      <p class="">
+        <span>d: </span>
+        <input type="number" formControlName="d">
+      </p>
+      <button type="submit" class="button-1">Create!</button>
+    </section>
+
+    <section [class]="isCreating === 'dice' ? 'show' : 'hidden'" class="sidebar__creating-dice_type">
+      <p *ngFor="let type of ['white', 'black', 'random', 'custom']">
+        <input formControlName="diceType" name="diceType" [value]="type" type="radio">
+        <span>{{type}}</span>
+      </p>
+    </section>
+
+    <div *ngIf="diceForm.value.diceType === 'custom'" class="sidebar__creating-dice_devtools">COMING SOON</div>
+  </form>
+
+  <form *ngIf="isCreating === 'text'" class="sidebar__creating-text">
+    text
+  </form>
+
+  <form *ngIf="isCreating === 'sit'" class="sidebar__creating-sit">
+    sit
+  </form>
+</div>

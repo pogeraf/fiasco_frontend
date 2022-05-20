@@ -1,0 +1,9 @@
+<form class="enter-username-form" (submit)="setUserName()" [formGroup]="form">
+  <div>
+    <span>User Name: </span>
+    <p class="underline-input"><input placeholder="* Enter Username" formControlName="name"></p>
+  </div>
+
+  <button type="submit" class="button-1" [disabled]="!form.valid">Enter</button>
+
+</form>

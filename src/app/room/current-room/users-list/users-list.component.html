@@ -1,0 +1,10 @@
+<div class="sidebar">
+  <div class="user-list" *ngFor="let item of getSortedUsers()">
+    <p class="user-list__user">
+      <span [class]="item.online ? 'online' : 'offline'" class="user-list__user_status"></span>
+      <span class="user-list__user_name">{{item.name}}</span>
+    </p>
+  </div>
+
+  <button class="button-1" routerLink="/">Back to List</button>
+</div>

@@ -1,0 +1,19 @@
+<div
+  class="room-card"
+  [style.background]="styleService.colorArrayToStr(styles.bg.color)"
+  [style.background-image]="styleService.bgUrlToStr(styles.bg)"
+  [style.border]="styleService.borderObjToStr(styles.border)"
+  [style.border-radius]="styleService.sizeToStr(styles.border.radius)"
+  [style.font-size]="styleService.sizeToStr(styles.font.size)"
+  [style.font-colot]="styleService.colorArrayToStr(styles.font.color)"
+>
+  <div
+    [style.background-color]="styleService.colorArrayToStr(styles.name.bg.color)"
+    class="room-card__name"
+  >
+    <span>Room: </span>
+    <span>{{ name }}</span>
+  </div>
+  <div class="room-card__members"> Online: {{ usersInRoom }} / {{maxUsers}} </div>
+  <button class="room-card__join button-1" [routerLink]="'/room/id/' + name">Join</button>
+</div>

@@ -1,0 +1,15 @@
+<div [ngStyle]="diceStyle" class="dice" [title]="dice?.player || ''">
+  <p class="dice__value">{{dice.value}}</p>
+  <p class="dice__creator-name-label">{{dice?.player || ''}}</p>
+</div>
+
+
+<!--  <p-->
+<!--    *ngIf="!(dice.value === 3 || dice.value === 5)"-->
+<!--    class="value"-->
+<!--    [style.top]="dice.value > 4 ? '-12px' : dice.value > 2 ? '-10px' : '-5px'"-->
+<!--  >-->
+<!--    <span-->
+<!--      class="dot"-->
+<!--      *ngFor="let dot of abstractArrayByLength(dice.value)">.</span>-->
+<!--  </p>-->

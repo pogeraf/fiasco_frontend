@@ -1,0 +1,31 @@
+.room-card {
+
+  &__name {
+    padding: 10px 25px;
+    position: absolute;
+    top: 0;
+    background: black;
+    color: white;
+    border-radius: 0 40px;
+
+    span:nth-child(1) {
+      font-style: italic;
+    }
+  }
+
+  &__join {
+    width: 80%;
+    height: 40px;
+
+    position: absolute;
+    bottom: 20px;
+
+    border: none;
+
+    font-size: 18px;
+    letter-spacing: 2px;
+    text-decoration: underline;
+
+    transition: .3s;
+  }
+}

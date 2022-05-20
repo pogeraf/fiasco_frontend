@@ -1,0 +1,25 @@
+<div *ngIf="isRoom; else error">
+  <div class="current-room">
+    <div>
+      <app-dice
+        #diceComponent
+        *ngFor="let dice of objKeys(currentRoom.items);"
+        [dice]="currentRoom.items[dice]"
+        (mousedown)="startMovingElementById(dice)"
+        (touchstart)="startMovingElementById(dice)"
+        (contextmenu)="deleteElement(dice, $event)"
+      >
+      </app-dice>
+    </div>
+  </div>
+  <app-users-list [users]="currentRoom.users"></app-users-list>
+  <app-create-element-sidebar (createElement)="addElement($event)" *ngIf="!(isMobile$ | async)"></app-create-element-sidebar>
+</div>
+
+<ng-template #error>
+  <div>
+    There is no room with "<span style="color: red">{{ name }}</span>" name
+  </div>
+
+  <button routerLink="/">Back to List</button>
+</ng-template>

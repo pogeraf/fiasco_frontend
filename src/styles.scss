@@ -1,1 +1,83 @@
 /* You can add global styles to this file, and also import other style files */
+* {
+  margin: 0;
+  padding: 0;
+  outline: none;
+
+  font-family: 'Courier New', monospace;
+}
+
+button {
+  cursor: pointer;
+}
+
+.room-card {
+  width: 250px;
+  height: 250px;
+
+  margin: 20px;
+
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  transition: .3s;
+}
+.room-card:hover {
+  box-shadow: 1px 1px 10px 1px gray;
+}
+
+.underline-input {
+  position: relative;
+  cursor: pointer;
+  font-size: 24px;
+  text-decoration: none;
+
+  &:after {
+    display: block;
+    position: absolute;
+    right: 0;
+    bottom: -1px;
+    width: 0;
+    height: 3px;
+    background-color: black;
+    content: "";
+    transition: width 0.5s;
+  }
+
+  &:focus-within:after {
+    width: 100%;
+    display: block;
+    position: absolute;
+    left: 0;
+    bottom: -1px;
+    height: 3px;
+    background-color: black;
+    content: "";
+    transition: width 0.5s;
+  }
+}
+
+.button-1 {
+  background: white;
+  color: black;
+  border: none;
+  transition: .5s;
+
+  &:hover {
+    background: black;
+    color: white;
+  }
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type=number] {
+  -moz-appearance: textfield;
+}
