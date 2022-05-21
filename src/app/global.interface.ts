@@ -2,7 +2,7 @@ import {
   ICreatedElement,
   IPlayersInRoom,
   TCoordinates,
-  TItemTypes,
+  TElementTypes,
 } from './room/current-room/current-room.interface';
 import { IStyles } from './room/room.interface';
 
@@ -50,7 +50,7 @@ export interface IUpsertElementEvent extends DataMessage {
     coordinates: TCoordinates;
     element_id: string;
     styles: IStyles;
-    type: TItemTypes;
+    type: TElementTypes;
     value: string;
     d?: number;
   };

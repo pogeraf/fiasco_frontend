@@ -1,6 +1,6 @@
 import { IStyles } from '../room.interface';
 
-export type TItemTypes = 'dice' | 'sit' | 'text';
+export type TElementTypes = 'dice' | 'sit' | 'text';
 
 export type TCurrentRoom = Array<ICurrentRoom>;
 
@@ -11,7 +11,7 @@ export interface IPlayersInRoom {
 }
 
 export interface IElement {
-  type: TItemTypes;
+  type: TElementTypes;
   coordinates: TCoordinates;
   styles: IStyles;
   value: string;

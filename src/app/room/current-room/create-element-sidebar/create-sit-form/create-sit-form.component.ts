@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { ISit, TItemTypes } from '../../current-room.interface';
+import { ISit, TElementTypes } from '../../current-room.interface';
 
 @Component({
   selector: 'app-create-sit-form',
@@ -14,7 +14,7 @@ export class CreateSitFormComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  createElementEvent(type: TItemTypes, data: ISit) {
+  createElementEvent(type: TElementTypes, data: ISit) {
     this.createElement.emit(data);
   }
 }

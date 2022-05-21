@@ -3,14 +3,14 @@ import {
   IDice,
   IDiceCreated,
   TCoordinates,
-  TItemTypes,
+  TElementTypes,
 } from '../../room/current-room/current-room.interface';
 import { IStyles } from '../../room/room.interface';
 import { StyleService } from '../color/style.service';
 import { ElementService } from '../element/element.service';
 
 interface IDiceConstruct {
-  type?: TItemTypes;
+  type?: TElementTypes;
   d?: number;
   value?: number;
   coordinates?: TCoordinates;

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IPlayersInRoom } from '../current-room.interface';
 import { CurrentRoomService } from '../../../services/current-room/current-room.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 type TSortedUsers = Array<ISortedUser>;
 
@@ -17,7 +18,17 @@ interface ISortedUser {
 export class UsersListComponent implements OnInit {
   players: { [id: string]: IPlayersInRoom } = {};
 
-  constructor(private currentRoomService: CurrentRoomService) {}
+  constructor(
+    protected router: Router,
+    protected activeRoute: ActivatedRoute,
+    protected currentRoomService: CurrentRoomService
+  ) {}
+
+  ngOnInit(): void {
+    this.currentRoomService.currentRoom$.subscribe((data) => {
+      this.players = data.players;
+    });
+  }
 
   public getSortedUsers(): TSortedUsers {
     const onlineUsers: TSortedUsers = [];
@@ -37,9 +48,14 @@ export class UsersListComponent implements OnInit {
     return Object.keys(obj || {});
   }
 
-  ngOnInit(): void {
-    this.currentRoomService.currentRoom$.subscribe((data) => {
-      this.players = data.players;
+  public rejoin() {
+    this.activeRoute.params.subscribe((params) => {
+      if (params['name']) {
+        this.router.navigate([
+          '/login/',
+          { redirectTo: `/room/id/${params['name']}` },
+        ]);
+      }
     });
   }
 }

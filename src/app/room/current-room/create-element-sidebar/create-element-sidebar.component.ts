@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { IDice, ISit, IText, TItemTypes } from '../current-room.interface';
+import { IDice, ISit, IText, TElementTypes } from '../current-room.interface';
 import { StyleService } from '../../../services/color/style.service';
 import { ElementService } from '../../../services/element/element.service';
 
@@ -10,8 +10,8 @@ import { ElementService } from '../../../services/element/element.service';
 })
 export class CreateElementSidebarComponent implements OnInit {
   @Output() createElement = new EventEmitter<IDice | ISit | IText>();
-  elementTypes: Array<TItemTypes> = ['dice', 'text', 'sit'];
-  isCreating: TItemTypes | undefined = undefined;
+  elementTypes: Array<TElementTypes> = ['dice', 'text', 'sit'];
+  isCreating: TElementTypes | undefined = undefined;
 
   constructor(
     public styleService: StyleService,
@@ -20,11 +20,11 @@ export class CreateElementSidebarComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  startCreating(type: TItemTypes) {
+  startCreating(type: TElementTypes) {
     this.isCreating = this.isCreating === type ? undefined : type;
   }
 
-  createElementEvent(type: TItemTypes, data: IDice | ISit | IText) {
+  createElementEvent(type: TElementTypes, data: IDice | ISit | IText) {
     this.elementService.addElement(data);
   }
 }

@@ -107,8 +107,11 @@ export class CurrentRoomComponent implements OnInit, OnDestroy {
     this.api.addEventHandler(
       EventTypes.UPSERT_ELEMENT,
       (message: IEventMessage<IUpsertElementEvent>) => {
-        this.currentRoom.elements[message.data.element_id] = message.data;
-
+        this.currentRoom.elements[message.data.element_id] = {
+          ...this.currentRoom.elements[message.data.element_id],
+          ...message.data,
+        };
+        console.log(this.currentRoom.elements[message.data.element_id]);
         this.updateRoomValue();
       }
     );

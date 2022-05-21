@@ -50,7 +50,9 @@ export class ElementComponent implements OnInit {
         componentSetRef(CardWithTextComponent);
         break;
       default:
-        console.error('Error component type');
+        console.error(
+          `Element with type ${this.element.type} is not supported`
+        );
     }
   }
 
@@ -69,13 +71,19 @@ export class ElementComponent implements OnInit {
 
   public endMovingElementById() {
     this.elementService.updateElementCoordinates(
-      this.element.type,
-      this.element.coordinates
+      this.element.element_id,
+      this.element.coordinates,
+      this.element.type
     );
     this.board.nativeElement.removeEventListener('mousemove', this.moveHandler);
     this.board.nativeElement.removeEventListener(
       'mouseup',
       this.moveEndHandler
     );
+  }
+
+  public showContextMenu(e: MouseEvent) {
+    e.preventDefault();
+    this.elementService.deleteElement(this.element.element_id);
   }
 }

@@ -11,7 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class LoginInRoomComponent implements OnInit {
   redirectTo: string = '';
   public form: FormGroup = new FormGroup({
-    name: new FormControl(null, [Validators.required]),
+    name: new FormControl(this.userService.userName, [Validators.required]),
   });
 
   constructor(

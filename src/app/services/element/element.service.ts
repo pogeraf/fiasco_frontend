@@ -4,6 +4,7 @@ import {
   ISit,
   IText,
   TCoordinates,
+  TElementTypes,
 } from '../../room/current-room/current-room.interface';
 import { EventTypes } from '../../global.interface';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -34,11 +35,13 @@ export class ElementService {
 
   public updateElementCoordinates(
     element_id: string,
-    coordinates: TCoordinates
+    coordinates: TCoordinates,
+    type: TElementTypes
   ): void {
     this.api.sendMessage(EventTypes.UPSERT_ELEMENT, {
       element_id,
       coordinates,
+      type,
     });
   }
 
