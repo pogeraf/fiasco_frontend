@@ -9,7 +9,7 @@ import {
 import { ActivatedRoute } from '@angular/router';
 import { ElementService } from '../../../../services/element/element.service';
 import { ElementDirective } from './element.directive';
-import { ICreatedElement } from '../../current-room.interface';
+import { ICreatedElement, TCoordinates } from '../../current-room.interface';
 import { DiceComponent } from './dice/dice.component';
 import { CardWithTextComponent } from './card-with-text/card-with-text.component';
 
@@ -21,9 +21,11 @@ import { CardWithTextComponent } from './card-with-text/card-with-text.component
 export class ElementComponent implements OnInit {
   @ViewChild(ElementDirective, { static: true })
   appCurrentElement!: ElementDirective;
+
   @Input() board: ElementRef;
   @Input() element: ICreatedElement;
 
+  mouseCoordinates: TCoordinates;
   constructor(
     private activatedRoute: ActivatedRoute,
     private elementService: ElementService
@@ -60,11 +62,18 @@ export class ElementComponent implements OnInit {
   moveEndHandler = () => this.endMovingElementById();
 
   private moveElement(e: MouseEvent) {
-    this.element.coordinates = [e.clientX - 10, e.clientY - 10];
+    this.element.coordinates = [
+      e.clientX - this.mouseCoordinates[0],
+      e.clientY - this.mouseCoordinates[1],
+    ];
   }
 
   public startMovingElementById(event: MouseEvent) {
     if (event.button === 2) return;
+    this.mouseCoordinates = [
+      event.clientX - this.element.coordinates[0],
+      event.clientY - this.element.coordinates[1],
+    ];
     this.board.nativeElement.addEventListener('mousemove', this.moveHandler);
     this.board.nativeElement.addEventListener('mouseup', this.moveEndHandler);
   }
