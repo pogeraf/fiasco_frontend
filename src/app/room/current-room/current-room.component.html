@@ -1,26 +1,7 @@
 <div *ngIf="isRoom; else error">
-  <div class="current-room">
-    <div class="elements-in-room" *ngFor="let item of objKeys(currentRoom.items);">
-        <app-dice
-          *ngIf="currentRoom.items[item].type === 'dice'"
-          [dice]="currentRoom.items[item]"
-          (mousedown)="startMovingElementById(item)"
-          (touchstart)="startMovingElementById(item)"
-          (contextmenu)="deleteElement(item, $event)"
-        >
-        </app-dice>
-        <app-card-with-text
-          *ngIf="currentRoom.items[item].type === 'text'"
-          [textBlock]="currentRoom.items[item]"
-          (mousedown)="startMovingElementById(item)"
-          (touchstart)="startMovingElementById(item)"
-          (contextmenu)="deleteElement(item, $event)"
-        >
-        </app-card-with-text>
-    </div>
-  </div>
-  <app-users-list [users]="currentRoom.users"></app-users-list>
-  <app-create-element-sidebar (createElement)="addElement($event)" *ngIf="!(isMobile$ | async)"></app-create-element-sidebar>
+  <app-board></app-board>
+  <app-users-list></app-users-list>
+  <app-create-element-sidebar></app-create-element-sidebar>
 </div>
 
 <ng-template #error>

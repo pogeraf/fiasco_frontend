@@ -1,7 +1,10 @@
 import {
+  ICreatedElement,
+  IPlayersInRoom,
   TCoordinates,
   TItemTypes,
 } from './room/current-room/current-room.interface';
+import { IStyles } from './room/room.interface';
 
 type PropType<TObj, TProp extends keyof TObj> = TObj[TProp];
 
@@ -28,7 +31,15 @@ export interface IEventMessage<TObj extends DataMessage> {
 
 export interface DataMessage {
   event: string;
-  data: object;
+  data: object | null;
+}
+
+export interface IInitialEvent extends DataMessage {
+  event: EventTypes.INITIAL;
+  data: {
+    players: { [id: string]: IPlayersInRoom };
+    elements: { [id: string]: ICreatedElement };
+  };
 }
 
 export interface IUpsertElementEvent extends DataMessage {
@@ -38,9 +49,19 @@ export interface IUpsertElementEvent extends DataMessage {
     player: string;
     coordinates: TCoordinates;
     element_id: string;
-    styles: object;
+    styles: IStyles;
     type: TItemTypes;
-    value?: number;
+    value: string;
     d?: number;
   };
+}
+
+export interface IPlayerConnectedEvent extends DataMessage {
+  event: EventTypes.PLAYER_CONNECTED;
+  data: null;
+}
+
+export interface IPlayerDisconnectedEvent extends DataMessage {
+  event: EventTypes.PLAYER_DISCONNECT;
+  data: null;
 }

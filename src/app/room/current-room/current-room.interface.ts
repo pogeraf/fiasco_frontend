@@ -1,4 +1,4 @@
-import { IRoom, IStyles } from '../room.interface';
+import { IStyles } from '../room.interface';
 
 export type TItemTypes = 'dice' | 'sit' | 'text';
 
@@ -6,36 +6,35 @@ export type TCurrentRoom = Array<ICurrentRoom>;
 
 export type TCoordinates = [number, number];
 
-export interface IUserInRoom {
+export interface IPlayersInRoom {
   online: boolean;
 }
 
-export interface IItem {
+export interface IElement {
   type: TItemTypes;
   coordinates: TCoordinates;
+  styles: IStyles;
+  value: string;
 }
 
-export interface ICreatedItem extends IItem {
+export interface IDice extends IElement {
+  d: number;
+}
+
+export interface IText extends IElement {}
+
+export interface ICreatedElement extends IElement {
   element_id: string;
   player: string;
   room: string;
 }
 
-export interface IDice extends IItem {
-  d: number;
-  styles: IStyles;
-  value: number;
-}
+export interface IDiceCreated extends IDice, ICreatedElement {}
+export interface ITextCreated extends IText, ICreatedElement {}
 
-export interface IDiceCreated extends IDice, ICreatedItem {}
+export interface ISit extends IElement {}
 
-export interface ISit extends IItem {}
-export interface IText extends IItem {
-  value: string;
-}
-
-export interface ICurrentRoom extends IRoom {
-  users: { [id: string]: IUserInRoom };
-  // TODO: HERE
-  items: { [id: string]: any };
+export interface ICurrentRoom {
+  elements: { [id: string]: ICreatedElement };
+  players: { [id: string]: IPlayersInRoom };
 }

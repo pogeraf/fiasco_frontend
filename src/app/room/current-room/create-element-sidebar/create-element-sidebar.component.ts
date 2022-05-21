@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { IDice, ISit, IText, TItemTypes } from '../current-room.interface';
 import { StyleService } from '../../../services/color/style.service';
+import { ElementService } from '../../../services/element/element.service';
 
 @Component({
   selector: 'app-create-element-sidebar',
@@ -12,7 +13,10 @@ export class CreateElementSidebarComponent implements OnInit {
   elementTypes: Array<TItemTypes> = ['dice', 'text', 'sit'];
   isCreating: TItemTypes | undefined = undefined;
 
-  constructor(public styleService: StyleService) {}
+  constructor(
+    public styleService: StyleService,
+    private elementService: ElementService
+  ) {}
 
   ngOnInit(): void {}
 
@@ -21,6 +25,6 @@ export class CreateElementSidebarComponent implements OnInit {
   }
 
   createElementEvent(type: TItemTypes, data: IDice | ISit | IText) {
-    this.createElement.emit(data);
+    this.elementService.addElement(data);
   }
 }

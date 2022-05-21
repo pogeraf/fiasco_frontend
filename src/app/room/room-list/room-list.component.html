@@ -3,8 +3,6 @@
     <app-room-card
       *ngFor="let room of roomList"
       [name]="room.name"
-      [maxUsers]="room.maxUsers"
-      [usersInRoom]="room.usersInRoom"
       [styles]="room.styles"
     ></app-room-card>
     <app-room-card-create></app-room-card-create>

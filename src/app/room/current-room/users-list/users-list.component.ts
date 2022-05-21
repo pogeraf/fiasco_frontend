@@ -1,5 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { IUserInRoom } from '../current-room.interface';
+import { Component, OnInit } from '@angular/core';
+import { IPlayersInRoom } from '../current-room.interface';
+import { CurrentRoomService } from '../../../services/current-room/current-room.service';
 
 type TSortedUsers = Array<ISortedUser>;
 
@@ -14,18 +15,18 @@ interface ISortedUser {
   styleUrls: ['./users-list.component.scss'],
 })
 export class UsersListComponent implements OnInit {
-  @Input() users: { [id: string]: IUserInRoom } = {};
+  players: { [id: string]: IPlayersInRoom } = {};
 
-  constructor() {}
+  constructor(private currentRoomService: CurrentRoomService) {}
 
   public getSortedUsers(): TSortedUsers {
     const onlineUsers: TSortedUsers = [];
     const offlineUsers: TSortedUsers = [];
 
-    for (const user in this.users) {
-      (this.users[user].online ? onlineUsers : offlineUsers).push({
+    for (const user in this.players) {
+      (this.players[user].online ? onlineUsers : offlineUsers).push({
         name: user,
-        online: this.users[user].online,
+        online: this.players[user].online,
       });
     }
 
@@ -36,5 +37,9 @@ export class UsersListComponent implements OnInit {
     return Object.keys(obj || {});
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.currentRoomService.currentRoom$.subscribe((data) => {
+      this.players = data.players;
+    });
+  }
 }

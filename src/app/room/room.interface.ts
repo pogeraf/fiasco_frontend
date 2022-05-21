@@ -15,9 +15,7 @@ export type TBorder =
 export type TUnit = 'px' | '%' | 'em' | 'pt' | 'rem';
 
 export interface IRoom {
-  name: string; // Unique key
-  maxUsers: number;
-  usersInRoom: number;
+  name: string;
 }
 
 export interface IStyles {

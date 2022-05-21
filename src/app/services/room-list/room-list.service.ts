@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { IRoomCard, TRoomList } from '../../room/room-list/room-list.interface';
-import { CurrentRoomService } from '../current-room/current-room.service';
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +11,7 @@ export class RoomListService {
   private roomListSource = new BehaviorSubject<TRoomList>(this.getRoomDB);
   public roomList$ = this.roomListSource.asObservable();
 
-  constructor(private currentRoomService: CurrentRoomService) {}
+  constructor() {}
 
   get getRoomDB(): any {
     return this.rooms;
@@ -21,15 +20,12 @@ export class RoomListService {
   public addRoomCard(value: IRoomCard): void {
     this.rooms.push(value);
     this.roomListSource.next(this.getRoomDB);
-    this.currentRoomService.addNewRoom(value.name, value.maxUsers);
     localStorage.setItem('roomList', JSON.stringify(this.rooms));
   }
 
   public defaultValueCard(): IRoomCard {
     return {
       name: '',
-      maxUsers: 5,
-      usersInRoom: 0,
       styles: {
         bg: {
           color: [255, 255, 255, 1],

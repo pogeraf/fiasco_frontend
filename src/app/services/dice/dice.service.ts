@@ -7,6 +7,7 @@ import {
 } from '../../room/current-room/current-room.interface';
 import { IStyles } from '../../room/room.interface';
 import { StyleService } from '../color/style.service';
+import { ElementService } from '../element/element.service';
 
 interface IDiceConstruct {
   type?: TItemTypes;
@@ -26,10 +27,13 @@ interface IDiceConstructWithId extends IDiceConstruct {
   providedIn: 'root',
 })
 export class DiceService {
-  constructor(private styleService: StyleService) {}
+  constructor(
+    private styleService: StyleService,
+    protected elementService: ElementService
+  ) {}
 
-  generateRandoValueForDice(d: number | undefined): number {
-    return Math.round(Math.random() * (d ? d++ : 7));
+  generateRandoValueForDice(d?: number): string {
+    return String(Math.round(1 + Math.random() * (d ? d - 1 : 5)));
   }
 
   public prepareDiceToBack(opt?: IDiceConstruct): IDice {
@@ -37,7 +41,7 @@ export class DiceService {
       type: opt?.type || 'dice',
       coordinates: opt?.coordinates || [0, 0],
       d: opt?.d || 6,
-      value: opt?.value || this.generateRandoValueForDice(opt?.d),
+      value: String(opt?.value) || this.generateRandoValueForDice(opt?.d),
       styles: {
         bg: {
           color: opt?.styles?.bg?.color || this.styleService.generateRgb(),
@@ -57,28 +61,9 @@ export class DiceService {
     };
   }
 
-  public prepareDiceTemplate(
-    type: 'white' | 'black' | 'random' | 'custom'
-  ): IDice {
+  public prepareDiceTemplate(type: 'white' | 'black' | 'random'): IDice {
     const dice = this.prepareDiceToBack();
-    dice.styles.border.color =
-      type === 'white'
-        ? this.styleService.blackColor
-        : type === 'black'
-        ? this.styleService.opacityColor
-        : dice.styles.border.color;
-    dice.styles.font.color =
-      type === 'white'
-        ? this.styleService.blackColor
-        : type === 'black'
-        ? this.styleService.whiteColor
-        : dice.styles.font.color;
-    dice.styles.bg.color =
-      type === 'white'
-        ? this.styleService.whiteColor
-        : type === 'black'
-        ? this.styleService.blackColor
-        : dice.styles.bg.color;
+    dice.styles = this.elementService.elementStyle(type);
     return dice;
   }
 

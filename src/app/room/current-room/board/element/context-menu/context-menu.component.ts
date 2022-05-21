@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ICreatedItem } from '../current-room.interface';
+import { ICreatedElement } from '../../../current-room.interface';
 
 @Component({
   selector: 'app-contex-menu',
@@ -7,7 +7,7 @@ import { ICreatedItem } from '../current-room.interface';
   styleUrls: ['./context-menu.component.scss'],
 })
 export class ContextMenuComponent implements OnInit {
-  @Input() item: ICreatedItem = {} as ICreatedItem;
+  @Input() item: ICreatedElement = {} as ICreatedElement;
 
   constructor() {}
 

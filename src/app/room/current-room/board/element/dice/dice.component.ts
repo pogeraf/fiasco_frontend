@@ -1,6 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { IDiceCreated } from '../current-room.interface';
-import { StyleService } from '../../../services/color/style.service';
+import { Component, OnInit } from '@angular/core';
+import { ElementDirective } from '../element.directive';
 
 interface IDiceStyle {
   left: string;
@@ -20,14 +19,13 @@ interface IDiceStyle {
   templateUrl: './dice.component.html',
   styleUrls: ['./dice.component.scss'],
 })
-export class DiceComponent implements OnInit {
-  @Input() dice: IDiceCreated;
-
+export class DiceComponent extends ElementDirective implements OnInit {
   public get diceStyle(): IDiceStyle {
-    const style = this.dice.styles;
+    const style = this.element.styles;
+
     return {
-      left: this.dice.coordinates[0] + 'px',
-      top: this.dice.coordinates[1] + 'px',
+      left: this.element.coordinates[0] + 'px',
+      top: this.element.coordinates[1] + 'px',
       background: this.styleService.colorArrayToStr(style.bg?.color),
       border: this.styleService.borderObjToStr(style.border),
       borderRadius: this.styleService.sizeToStr(style.border?.radius),
@@ -35,8 +33,6 @@ export class DiceComponent implements OnInit {
       color: this.styleService.colorArrayToStr(style.font?.color),
     };
   }
-
-  constructor(private styleService: StyleService) {}
 
   ngOnInit(): void {}
 

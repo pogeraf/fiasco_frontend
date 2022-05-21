@@ -56,8 +56,7 @@ export class RoomCardCreateComponent implements OnInit {
     if (this.devMod) {
       return true;
     } else {
-      this.newCard.maxUsers = Number(this.newCard.maxUsers);
-      return Boolean(this.newCard.maxUsers && this.newCard.name);
+      return Boolean(this.newCard.name);
     }
   }
 }
