@@ -9,11 +9,16 @@
   [style.font-colot]="styleService.colorArrayToStr(newCard.styles.font.color)"
 >
   <div class="room-card-creating__name">
-    <input [style.background-color]="styleService.colorArrayToStr(newCard.styles.name.bg.color)" type="text" [(ngModel)]="newCard.name">
+    <input
+      [style.background-color]="styleService.colorArrayToStr(newCard.styles.name.bg.color)"
+      type="text"
+      [(ngModel)]="newCard.name"
+      autofocus
+    >
   </div>
-<!--  <div class="room-card-creating__members"> {{ newCard.usersInRoom }}/<input type="number"-->
-<!--                                                                             [(ngModel)]="newCard.maxUsers">-->
-<!--  </div>-->
+  <!--  <div class="room-card-creating__members"> {{ newCard.usersInRoom }}/<input type="number"-->
+  <!--                                                                             [(ngModel)]="newCard.maxUsers">-->
+  <!--  </div>-->
   <button (click)="create()" class="room-card-creating__create button-1">Join</button>
   <button (click)="cancel()" class="room-card-creating__cancel button-1">Cancel</button>
   <button class="room-card-creating__dev">Devtools</button>
@@ -24,5 +29,6 @@
   <div
     (click)="isCreating = !isCreating"
     class="room-card room-card-mask"
-  >+</div>
+  >+
+  </div>
 </ng-template>
