@@ -76,7 +76,7 @@ export class CurrentRoomComponent implements OnInit, OnDestroy {
     this.api.addEventHandler(
       EventTypes.INITIAL,
       (message: IEventMessage<IInitialEvent>) => {
-        this.currentRoom = message.data;
+        this.currentRoomService.setCurrentRoomValue(message.data);
         for (const key in this.currentRoom.elements) {
           this.currentRoom.elements[key].contextmenu =
             this.elementService.getContextmenu(key);

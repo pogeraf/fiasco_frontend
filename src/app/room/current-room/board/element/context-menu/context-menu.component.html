@@ -1,3 +1,5 @@
 <div class="context-menu" [style]="styles">
-  <p *ngFor="let item of items" (click)="item.callback()" class="context-menu__item">{{item.name}}</p>
+  <p *ngFor="let item of items" (mouseup)="item.callback()" class="context-menu__item">
+   <span>{{item.name}}</span>
+  </p>
 </div>

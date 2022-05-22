@@ -18,8 +18,8 @@ export class ContextMenuComponent implements OnInit {
   public get styles() {
     const left =
       (this.position[0] === 'left'
-        ? this.mouseCoordinates[0] - ElementComponent.contextmenuSize[0]
-        : this.mouseCoordinates[0]) + 'px';
+        ? this.mouseCoordinates[0] - ElementComponent.contextmenuSize[0] - 10
+        : this.mouseCoordinates[0] + 10) + 'px';
     const top =
       (this.position[1] === 'top'
         ? this.mouseCoordinates[1] - ElementComponent.contextmenuSize[1]
