@@ -1,6 +1,3 @@
-<div class="context-menu">
-  <p *ngIf="item.type === 'dice'" class="context-menu__item">Roll</p>
-  <p class="context-menu__item">Attach to</p>
-  <p class="context-menu__item">Devtools</p>
-  <p class="context-menu__item">Delete</p>
+<div class="context-menu" [style]="styles">
+  <p *ngFor="let item of items" (click)="item.callback()" class="context-menu__item">{{item.name}}</p>
 </div>

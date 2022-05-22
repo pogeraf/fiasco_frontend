@@ -22,10 +22,22 @@ export class ElementComponent implements OnInit {
   @ViewChild(ElementDirective, { static: true })
   appCurrentElement!: ElementDirective;
 
+  static contextmenuSize: TCoordinates = [200, 100];
   @Input() board: ElementRef;
   @Input() element: ICreatedElement;
 
-  mouseCoordinates: TCoordinates;
+  mouseShiftCoordinates: TCoordinates;
+  mouseCoordinatesByElement: TCoordinates;
+  mouseCoordinatesByPage: TCoordinates;
+
+  openContextmenu: boolean = false;
+
+  public get elementPosition() {
+    return {
+      left: this.element.coordinates[0] + 'px',
+      top: this.element.coordinates[1] + 'px',
+    };
+  }
   constructor(
     private activatedRoute: ActivatedRoute,
     private elementService: ElementService
@@ -63,14 +75,14 @@ export class ElementComponent implements OnInit {
 
   private moveElement(e: MouseEvent) {
     this.element.coordinates = [
-      e.clientX - this.mouseCoordinates[0],
-      e.clientY - this.mouseCoordinates[1],
+      e.clientX - this.mouseShiftCoordinates[0],
+      e.clientY - this.mouseShiftCoordinates[1],
     ];
   }
 
   public startMovingElementById(event: MouseEvent) {
     if (event.button === 2) return;
-    this.mouseCoordinates = [
+    this.mouseShiftCoordinates = [
       event.clientX - this.element.coordinates[0],
       event.clientY - this.element.coordinates[1],
     ];
@@ -81,8 +93,7 @@ export class ElementComponent implements OnInit {
   public endMovingElementById() {
     this.elementService.updateElementCoordinates(
       this.element.element_id,
-      this.element.coordinates,
-      this.element.type
+      this.element.coordinates
     );
     this.board.nativeElement.removeEventListener('mousemove', this.moveHandler);
     this.board.nativeElement.removeEventListener(
@@ -93,6 +104,41 @@ export class ElementComponent implements OnInit {
 
   public showContextMenu(e: MouseEvent) {
     e.preventDefault();
-    this.elementService.deleteElement(this.element.element_id);
+    this.mouseCoordinatesByPage = [e.screenX, e.screenY];
+    this.mouseCoordinatesByElement = [
+      Math.abs(this.element.coordinates[0] - e.clientX),
+      e.clientY - this.element.coordinates[1],
+    ];
+
+    this.openContextmenu = !this.openContextmenu;
+
+    if (this.openContextmenu) {
+      setTimeout(() => {
+        document.addEventListener(
+          'mouseup',
+          (e: any) => {
+            e.preventDefault();
+            // TODO: hardcode
+            this.openContextmenu =
+              e.button === 2 && e?.path?.[4]?.tagName === 'APP-ELEMENT';
+          },
+          {
+            once: true,
+          }
+        );
+      }, 1000);
+    }
+  }
+  public get contextmenuPosition(): ['left' | 'right', 'top' | 'bottom'] {
+    return [
+      this.mouseCoordinatesByPage[0] + ElementComponent.contextmenuSize[0] >
+      window.screen.width
+        ? 'left'
+        : 'right',
+      this.mouseCoordinatesByPage[1] + ElementComponent.contextmenuSize[1] >
+      window.screen.height
+        ? 'top'
+        : 'bottom',
+    ];
   }
 }

@@ -1,12 +1,12 @@
 .dice {
   width: 24px;
   height: 24px;
-  position: absolute;
 
-  cursor: grab;
   user-select: none;
 
   z-index: 20;
+
+  position: absolute;
 
   &__value {
     width: 100%;
@@ -19,11 +19,12 @@
   }
 
   &__creator-name-label {
-    width: 200%;
-    height: 20px;
+    max-width: 200%;
+    width: auto;
+    height: auto;
 
     position: absolute;
-    bottom: -23px;
+    bottom: -15px;
     left: 5px;
 
     font-size: 10px;

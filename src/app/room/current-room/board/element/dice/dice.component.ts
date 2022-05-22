@@ -2,9 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ElementDirective } from '../element.directive';
 
 interface IDiceStyle {
-  left: string;
-  top: string;
-
   background: string;
 
   border: string;
@@ -24,8 +21,6 @@ export class DiceComponent extends ElementDirective implements OnInit {
     const style = this.element.styles;
 
     return {
-      left: this.element.coordinates[0] + 'px',
-      top: this.element.coordinates[1] + 'px',
       background: this.styleService.colorArrayToStr(style.bg?.color),
       border: this.styleService.borderObjToStr(style.border),
       borderRadius: this.styleService.sizeToStr(style.border?.radius),

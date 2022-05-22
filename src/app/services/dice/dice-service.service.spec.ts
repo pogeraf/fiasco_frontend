@@ -1,5 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
+// @ts-ignore
 import { DiceService } from './dice-service.service';
 
 describe('DiceServiceService', () => {

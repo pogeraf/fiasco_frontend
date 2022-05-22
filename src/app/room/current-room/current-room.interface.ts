@@ -10,6 +10,11 @@ export interface IPlayersInRoom {
   online: boolean;
 }
 
+export interface IContextMenuItem {
+  name: string;
+  callback: CallableFunction;
+}
+
 export interface IElement {
   type: TElementTypes;
   coordinates: TCoordinates;
@@ -17,17 +22,19 @@ export interface IElement {
   value: string;
 }
 
+export interface ICreatedElement extends IElement {
+  element_id: string;
+  player: string;
+  room: string;
+  // TODO: Required
+  contextmenu?: Array<IContextMenuItem>;
+}
+
 export interface IDice extends IElement {
   d: number;
 }
 
 export interface IText extends IElement {}
-
-export interface ICreatedElement extends IElement {
-  element_id: string;
-  player: string;
-  room: string;
-}
 
 export interface IDiceCreated extends IDice, ICreatedElement {}
 export interface ITextCreated extends IText, ICreatedElement {}

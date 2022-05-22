@@ -1,0 +1,30 @@
+
+.context-menu {
+  width: 100px;
+  height: auto;
+  max-height: 200px;
+
+  overflow: auto;
+  user-select: none;
+
+  position: absolute;
+
+  left: 15px;
+  top: 45px;
+
+  background: rgba(0, 0, 0, 0.8);
+
+  z-index: 1000;
+
+  &__item {
+    padding: 10px 5px;
+
+    color: white;
+    cursor: pointer;
+    transition: .3s;
+
+    &:hover {
+      background: rgba(197, 197, 197, 0.8);
+    }
+  }
+}

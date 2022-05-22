@@ -14,7 +14,7 @@ export class CreateTextFormComponent implements OnInit {
 
   textForm: FormGroup = new FormGroup({
     text: new FormControl('', Validators.required),
-    blockType: new FormControl('default', Validators.required),
+    blockType: new FormControl('white', Validators.required),
     style: new FormControl(''),
   });
 
@@ -24,11 +24,12 @@ export class CreateTextFormComponent implements OnInit {
 
   createElementEvent() {
     this.createElement.emit(
-      this.textareaService.defaultTextElement({
-        coordinates: [15, 150],
+      this.textareaService.createTextElement({
+        coordinates: [15, 200],
         text: this.textForm.value.text,
+        type: this.textForm.value.blockType,
       })
     );
-    this.textForm.reset({ blockType: 'default' });
+    this.textForm.reset({ blockType: this.textForm.value.blockType });
   }
 }

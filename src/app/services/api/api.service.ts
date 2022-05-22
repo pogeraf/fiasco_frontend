@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
-import { IHandlers, EventTypes } from '../../global.interface';
+import { IEventHandlers, EventTypes } from '../../global.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -9,7 +9,7 @@ export class ApiService {
   // @ts-ignore
   protected ws: WebSocketSubject<any>;
 
-  protected handlers: IHandlers = {} as IHandlers;
+  protected handlers: IEventHandlers = {} as IEventHandlers;
 
   constructor() {}
 
@@ -22,6 +22,14 @@ export class ApiService {
         if (this.handlers[message.event]) {
           this.handlers[message.event](message);
         }
+      },
+      (error) => {
+        console.log('***********************');
+        console.log(error);
+        console.log('***********************');
+        this.ws = webSocket(
+          `wss://api.fiasco.world/?room=${room}&player=${player}`
+        );
       }
     );
   }

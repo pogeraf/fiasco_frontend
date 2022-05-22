@@ -68,7 +68,7 @@ export class CreateDiceFormComponent implements OnInit {
       ...this.diceByType,
       d: this.diceForm.value.d,
       value: this.diceService.generateRandoValueForDice(this.diceForm.value.d),
-      coordinates: [15, 150],
+      coordinates: [15, 200],
     });
   }
 }

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {
+  IContextMenuItem,
   IDice,
   IDiceCreated,
   TCoordinates,
@@ -31,6 +32,21 @@ export class DiceService {
     private styleService: StyleService,
     protected elementService: ElementService
   ) {}
+
+  getContextmenuForDice(elem: IDiceCreated): Array<IContextMenuItem> {
+    return [
+      {
+        name: 'Roll',
+        callback: () => {
+          this.elementService.updateElementValues(
+            elem.element_id,
+            this.generateRandoValueForDice(elem.d)
+          );
+        },
+      },
+      ...this.elementService.getContextmenu(elem.element_id),
+    ];
+  }
 
   generateRandoValueForDice(d?: number): string {
     return String(Math.round(1 + Math.random() * (d ? d - 1 : 5)));

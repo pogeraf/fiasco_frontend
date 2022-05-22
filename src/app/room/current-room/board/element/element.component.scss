@@ -1,0 +1,9 @@
+.element {
+  cursor: grab;
+
+  position: absolute;
+
+  &:active {
+    cursor: grabbing;
+  }
+}

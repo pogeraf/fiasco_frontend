@@ -1,10 +1,8 @@
 import { Injectable } from '@angular/core';
 import {
-  IDice,
-  ISit,
-  IText,
+  IContextMenuItem,
+  IElement,
   TCoordinates,
-  TElementTypes,
 } from '../../room/current-room/current-room.interface';
 import { EventTypes } from '../../global.interface';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -25,27 +23,37 @@ export class ElementService {
     private styleService: StyleService
   ) {}
 
-  public addElement(element: IDice | ISit | IText) {
+  getContextmenu(id: string): Array<IContextMenuItem> {
+    return [
+      {
+        name: 'Delete',
+        callback: () => {
+          this.deleteElement(id);
+        },
+      },
+    ];
+  }
+
+  public addElement(element: IElement) {
     this.api.sendMessage(EventTypes.UPSERT_ELEMENT, element);
   }
 
   public deleteElement(id: string) {
+    console.log(id);
     this.api.sendMessage(EventTypes.DELETE_ELEMENT, { element_id: id });
   }
 
   public updateElementCoordinates(
     element_id: string,
-    coordinates: TCoordinates,
-    type: TElementTypes
+    coordinates: TCoordinates
   ): void {
     this.api.sendMessage(EventTypes.UPSERT_ELEMENT, {
       element_id,
       coordinates,
-      type,
     });
   }
 
-  public updateElementValues(element_id: string, value: TCoordinates): void {
+  public updateElementValues(element_id: string, value: string): void {
     this.api.sendMessage(EventTypes.UPSERT_ELEMENT, {
       element_id,
       value,

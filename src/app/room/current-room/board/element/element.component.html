@@ -1,5 +1,9 @@
+<div class="element"
+     [style]="elementPosition">
 <div
   (mousedown)="startMovingElementById($event)"
   (contextmenu)="showContextMenu($event)">
-  <ng-template appCurrentElement></ng-template>
+  <ng-template  appCurrentElement></ng-template>
+</div>
+  <app-context-menu *ngIf="openContextmenu" [items]="element.contextmenu" [position]="contextmenuPosition" [mouseCoordinates]="mouseCoordinatesByElement"></app-context-menu>
 </div>

@@ -8,7 +8,7 @@ import { IStyles } from './room/room.interface';
 
 type PropType<TObj, TProp extends keyof TObj> = TObj[TProp];
 
-export type IHandlers = {
+export type IEventHandlers = {
   [id in EventTypes]: CallableFunction;
 };
 
