@@ -2,7 +2,7 @@
 
 ## Description
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.5
-and using [WebSocket](https://github.com/websockets)
+and using [WebSocket](https://github.com/websockets) protocol
 
 Designed for creating a room with canvas on that You can add elements and interact with these 
 

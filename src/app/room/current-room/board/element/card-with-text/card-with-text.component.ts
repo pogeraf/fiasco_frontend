@@ -36,4 +36,8 @@ export class CardWithTextComponent extends ElementDirective implements OnInit {
   cancel(): void {
     this.textareaService.toggleEditingTextarea(this.element.element_id, false);
   }
+
+  get valueChanged(): boolean {
+    return this.textValue !== this.element.value;
+  }
 }

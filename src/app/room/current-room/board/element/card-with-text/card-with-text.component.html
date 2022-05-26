@@ -14,7 +14,7 @@
     <span class="mask" *ngIf="!(element.player === userService.userName); else editingUser">{{ element.value }}</span>
 
     <ng-template #editingUser>
-      <button (click)="save()" class="button button-default save">Save</button>
+      <button (click)="save()" class="button save" [class]="valueChanged ? 'button-default' : 'button-disable'" [disabled]="!valueChanged">Save</button>
       <button (click)="cancel()" class="button button-default cancel">Cancel</button>
       <textarea [(ngModel)]="textValue" autofocus></textarea>
     </ng-template>
