@@ -6,7 +6,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 Run `npm run serve:l` for a dev server on Your machine **only**. Navigate to `http://localhost:4200/`. 
 
-Run `npm run serve:g` for a running server that will be on Your network **globally**. Navigate to `http://{{network_computer_address}}:4200/`.
+Run `npm run serve:g` for a running server that will be on Your network **globally**. Navigate to `http://{{network_computer_address}}:4200/`  (`http://localhost:4200/` - **for the machine on which it is running only**).
 
 The application will automatically reload **on every machine** if you change **any** of the source files.
 
