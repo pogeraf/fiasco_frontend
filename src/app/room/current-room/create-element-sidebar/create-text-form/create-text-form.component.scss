@@ -16,14 +16,18 @@
     justify-content: space-around;
 
     &:after {
-      display: block;
+      content: "";
+      width: 3px;
+      height: 100px;
+
       position: absolute;
       left: 200px;
       top: 30px;
-      width: 3px;
-      height: 100px;
+
+      display: block;
+
       background: rgb(0,0,0);
-      content: "";
+
       transition: .2s height;
     }
 
@@ -34,16 +38,18 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      word-wrap: break-word;
 
       border: 2px solid;
-      overflow: auto;
-      cursor: not-allowed;
 
       line-height: 12px;
+      word-wrap: break-word;
+
+      cursor: not-allowed;
+      overflow: auto;
 
       &.black {
         background: black;
+
         color: white;
       }
 
@@ -67,6 +73,7 @@
 
   &__text {
     margin: 0 25px;
+
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -102,16 +109,18 @@
       }
     }
 
-    button[type = 'submit'] {
-      text-align: center;
+    .button {
       width: 80px;
       height: 25px;
+
       border: solid;
 
+      text-align: center;
+
       transition-delay: unset;
-      &:hover {
-        background: lightgreen !important;
-        color: rgba(100, 100, 100) !important;
+
+      &.button-accept {
+        border: solid;
       }
     }
   }

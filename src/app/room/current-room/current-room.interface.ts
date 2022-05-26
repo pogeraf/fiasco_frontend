@@ -37,7 +37,9 @@ export interface IDice extends IElement {
 export interface IText extends IElement {}
 
 export interface IDiceCreated extends IDice, ICreatedElement {}
-export interface ITextCreated extends IText, ICreatedElement {}
+export interface ITextCreated extends IText, ICreatedElement {
+  isEditing?: boolean;
+}
 
 export interface ISit extends IElement {}
 

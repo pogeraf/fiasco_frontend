@@ -1,7 +1,7 @@
 <div class="sidebar" [class]="isCreating ? 'is-creating' : ''">
   <div class="sidebar__element-list">
     <p
-      class="sidebar__element button-1"
+      class="sidebar__element button button-default"
       [class]="isCreating === item ? 'is-creating' : ''"
       *ngFor="let item of elementTypes"
       (click)="startCreating(item)"

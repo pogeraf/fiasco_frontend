@@ -1,5 +1,27 @@
+<div
+  class="block-with-text"
+  [class]="{
+    'editing': element.isEditing && element.player === userService.userName,
+    'cursor-not-allowed': element.isEditing && !(element.player === userService.userName)
+    }"
+  [style]="textareaStyle"
+  [style.border]="!element.isEditing ? styleService.borderObjToStr(element.styles.border) : ''"
+>
+  <span *ngIf="!element.isEditing; else editing">{{ element.value }}</span>
 
-<div class="block-with-text" title="Cart with text that is created" [style]="textareaStyle">
-  <span>{{element.value}}</span>
-  <p class="block-with-text__creator-name-label">{{element?.player || ''}}</p>
+  <ng-template #editing>
+
+    <span class="mask" *ngIf="!(element.player === userService.userName); else editingUser">{{ element.value }}</span>
+
+    <ng-template #editingUser>
+      <button (click)="save()" class="button button-default save">Save</button>
+      <button (click)="cancel()" class="button button-default cancel">Cancel</button>
+      <textarea [(ngModel)]="textValue" autofocus></textarea>
+    </ng-template>
+
+  </ng-template>
+
+  <p [title]="element?.player" class="block-with-text__creator-name-label">{{element?.player || ''}}</p>
 </div>
+
+

@@ -1,24 +1,13 @@
 .room-card-creating {
-  button {
-    border: none;
-
-    transition: .3s;
-    color: white;
-    background: black;
-    &:hover {
-      background: #f0f0f0;
-      color: black;
-    }
-  }
-
   &__create, &__cancel {
     width: 40%;
     height: 40px;
 
-    margin: 0 10px;
-
     position: absolute;
     bottom: 20px;
+
+    margin: 0 10px;
+
     border: none;
   }
 
@@ -27,12 +16,6 @@
   }
   &__cancel {
     right: 0;
-  }
-  &__create:hover {
-    background: lightgreen !important;
-  }
-  &__cancel:hover {
-    background: indianred !important;
   }
 
   &__name {
@@ -43,6 +26,7 @@
     justify-content: center;
     input {
       width: auto;
+
       color: white;
     }
   }
@@ -57,15 +41,17 @@
   }
 
   input {
-    font-size: 20px;
-    text-align: center;
     border: none;
     border-bottom: 2px solid black;
+
+    font-size: 20px;
+    text-align: center;
   }
 
   &__random,
   &__dev {
     width: 70px;
+
     position: absolute;
     top: 0
   }
@@ -92,6 +78,7 @@
   height: 248px;
 
   border: 3px black dashed;
+
   font-size: 50px;
 
   cursor: cell;

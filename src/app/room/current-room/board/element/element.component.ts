@@ -2,7 +2,9 @@ import {
   Component,
   ElementRef,
   Input,
+  OnChanges,
   OnInit,
+  SimpleChanges,
   Type,
   ViewChild,
 } from '@angular/core';
@@ -12,15 +14,16 @@ import { ElementDirective } from './element.directive';
 import { ICreatedElement, TCoordinates } from '../../current-room.interface';
 import { DiceComponent } from './dice/dice.component';
 import { CardWithTextComponent } from './card-with-text/card-with-text.component';
+import { UserService } from '../../../../services/user/user.service';
 
 @Component({
   selector: 'app-element',
   templateUrl: './element.component.html',
   styleUrls: ['./element.component.scss'],
 })
-export class ElementComponent implements OnInit {
+export class ElementComponent implements OnInit, OnChanges {
   @ViewChild(ElementDirective, { static: true })
-  appCurrentElement!: ElementDirective;
+  appCurrentElement: ElementDirective;
 
   static contextmenuSize: TCoordinates = [200, 100];
   @Input() board: ElementRef;
@@ -31,6 +34,7 @@ export class ElementComponent implements OnInit {
   mouseCoordinatesByPage: TCoordinates;
 
   openContextmenu: boolean = false;
+  isMoving: boolean;
 
   public get elementPosition() {
     return {
@@ -38,13 +42,21 @@ export class ElementComponent implements OnInit {
       top: this.element.coordinates[1] + 'px',
     };
   }
+
   constructor(
     private activatedRoute: ActivatedRoute,
-    private elementService: ElementService
+    private elementService: ElementService,
+    public userService: UserService
   ) {}
 
   ngOnInit(): void {
     this.loadComponent();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.loadComponent();
+    // @ts-ignore
+    this.isMoving = !this.element?.isEditing;
   }
 
   loadComponent() {
@@ -102,8 +114,12 @@ export class ElementComponent implements OnInit {
     );
   }
 
-  public showContextMenu(e: MouseEvent) {
+  deleteRightClickByElement(e: MouseEvent) {
     e.preventDefault();
+  }
+
+  public showContextMenu(e: MouseEvent) {
+    this.deleteRightClickByElement(e);
     this.mouseCoordinatesByPage = [e.screenX, e.screenY];
     this.mouseCoordinatesByElement = [
       Math.abs(this.element.coordinates[0] - e.clientX),
@@ -129,6 +145,7 @@ export class ElementComponent implements OnInit {
       }, 1000);
     }
   }
+
   public get contextmenuPosition(): ['left' | 'right', 'top' | 'bottom'] {
     return [
       this.mouseCoordinatesByPage[0] + ElementComponent.contextmenuSize[0] >
@@ -140,5 +157,9 @@ export class ElementComponent implements OnInit {
         ? 'top'
         : 'bottom',
     ];
+  }
+
+  public closeContextMenu(): void {
+    this.openContextmenu = false;
   }
 }

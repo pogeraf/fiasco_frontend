@@ -13,14 +13,14 @@
 
   <section [class]="isCreating ? 'show' : 'hidden'" class="creating-text-form__text">
     <span class="creating-text-form__header">Text:</span>
-    <textarea type="number" formControlName="text"></textarea>
+    <textarea formControlName="text"></textarea>
   </section>
   <section [class]="isCreating ? 'show' : 'hidden'" class="creating-text-form__type">
     <p *ngFor="let type of ['white', 'black', 'custom']">
       <input formControlName="blockType" name="blockType" [value]="type" type="radio">
       <span>{{type}}</span>
     </p>
-    <button type="submit" class="button-1">Create!</button>
+    <button type="submit" class="button" [class]="textForm.valid ? 'button-accept' : 'button-disable'" [disabled]="!textForm.valid">Create!</button>
   </section>
   <div *ngIf="textForm.value.blockType === 'custom'" class="creating-text-form__devtools">COMING SOON</div>
 </form>

@@ -9,8 +9,8 @@ export interface IRoomCardStyleCss {
   border: string;
   borderRadius: string;
 
-  fontSize: string;
   color: string;
+  fontSize: string;
 }
 
 export interface IName extends IDefaultStyle {

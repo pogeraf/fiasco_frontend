@@ -2,11 +2,10 @@
   width: 24px;
   height: 24px;
 
-  user-select: none;
-
+  position: absolute;
   z-index: 20;
 
-  position: absolute;
+  user-select: none;
 
   &__value {
     width: 100%;
@@ -27,11 +26,12 @@
     bottom: -15px;
     left: 5px;
 
-    font-size: 10px;
     color: black;
+    font-size: 10px;
     white-space: nowrap;
-    overflow: hidden;
     text-overflow: ellipsis;
+
+    overflow: hidden;
   }
 }
 

@@ -1,28 +1,32 @@
 .sidebar {
   width: 150px;
   height: 40vh;
-  overflow-y: auto;
-  overflow-x: hidden;
 
   position: fixed;
   right: 0;
   top: 0;
-
   z-index: 4;
 
   box-shadow: 1px 1px 10px 1px gray;
+
+  overflow-y: auto;
+  overflow-x: hidden;
 
   .user-list {
 
     &__user {
       margin: 10px 0;
+
       display: flex;
       align-items: center;
+
       &_name {
         width: 80%;
+
         white-space: nowrap;
-        overflow: hidden;
         text-overflow: ellipsis;
+
+        overflow: hidden;
 
       }
       &_status {
@@ -30,6 +34,7 @@
         height: 10px;
 
         margin: 0 5px;
+
         display: inline-block;
 
         border-radius: 50%;

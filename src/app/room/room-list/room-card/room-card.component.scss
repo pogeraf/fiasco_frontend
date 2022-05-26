@@ -1,12 +1,16 @@
 .room-card {
 
   &__name {
-    padding: 10px 25px;
     position: absolute;
     top: 0;
+
+    padding: 10px 25px;
+
     background: black;
-    color: white;
+
     border-radius: 0 40px;
+
+    color: white;
 
     span:nth-child(1) {
       font-style: italic;

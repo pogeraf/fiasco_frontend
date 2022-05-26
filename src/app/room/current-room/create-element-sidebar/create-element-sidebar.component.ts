@@ -25,7 +25,6 @@ export class CreateElementSidebarComponent implements OnInit {
   }
 
   createElementEvent(type: TElementTypes, data: IDice | ISit | IText) {
-    console.log(data);
     this.elementService.addElement(data);
   }
 }

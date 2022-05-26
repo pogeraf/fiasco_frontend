@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ElementComponent } from '../element.component';
 import {
   IContextMenuItem,
@@ -14,6 +14,8 @@ export class ContextMenuComponent implements OnInit {
   @Input() items: Array<IContextMenuItem> | undefined;
   @Input() position: ['left' | 'right', 'top' | 'bottom'];
   @Input() mouseCoordinates: TCoordinates;
+
+  @Output() close = new EventEmitter();
 
   public get styles() {
     const left =

@@ -1,7 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CurrentRoomService } from '../../services/current-room/current-room.service';
-import { ICurrentRoom } from './current-room.interface';
+import {
+  ICurrentRoom,
+  IDiceCreated,
+  ITextCreated,
+} from './current-room.interface';
 import { ApiService } from '../../services/api/api.service';
 import { DiceService } from '../../services/dice/dice.service';
 import { UserService } from '../../services/user/user.service';
@@ -16,6 +20,7 @@ import {
   IUpsertElementEvent,
 } from '../../global.interface';
 import { ElementService } from '../../services/element/element.service';
+import { TextareaService } from '../../services/textarea/textarea.service';
 
 @Component({
   selector: 'app-room',
@@ -49,7 +54,8 @@ export class CurrentRoomComponent implements OnInit, OnDestroy {
     private diceService: DiceService,
     private userService: UserService,
     private mobile: MobileService,
-    private elementService: ElementService
+    private elementService: ElementService,
+    private textareaService: TextareaService
   ) {
     this.isMobile$ = mobile.isMobile$;
     activatedRoute.params.subscribe((params) => {
@@ -78,16 +84,16 @@ export class CurrentRoomComponent implements OnInit, OnDestroy {
       (message: IEventMessage<IInitialEvent>) => {
         this.currentRoomService.setCurrentRoomValue(message.data);
         for (const key in this.currentRoom.elements) {
-          this.currentRoom.elements[key].contextmenu =
-            this.elementService.getContextmenu(key);
           // this.currentRoom.elements[key].contextmenu =
-          //   this.currentRoom.elements[key]?.type || key === 'dice'
-          //     ? this.diceService.getContextmenuForDice(
-          //         this.currentRoom.elements[key] as IDiceCreated
-          //       )
-          //     : this.textareaService.getContextmenuForText(
-          //         this.currentRoom.elements[key] as ITextCreated
-          //       );
+          //   this.elementService.getContextmenu(key);
+          this.currentRoom.elements[key].contextmenu =
+            this.currentRoom.elements[key]?.type === 'dice' || key === 'dice'
+              ? this.diceService.getContextmenuForDice(
+                  this.currentRoom.elements[key] as IDiceCreated
+                )
+              : this.textareaService.getContextmenuForText(
+                  this.currentRoom.elements[key] as ITextCreated
+                );
           this.currentRoomService.setCurrentRoomValue(this.currentRoom);
         }
       }
@@ -125,18 +131,18 @@ export class CurrentRoomComponent implements OnInit, OnDestroy {
         this.currentRoom.elements[message.data.element_id] = {
           ...this.currentRoom.elements[message.data.element_id],
           ...message.data,
-          contextmenu: this.elementService.getContextmenu(
-            message.data.element_id
-          ),
-          // contextmenu:
-          //   this.currentRoom.elements[message.data.element_id]?.type ||
-          //   message.data?.type === 'dice'
-          //     ? this.diceService.getContextmenuForDice(
-          //         message.data as IDiceCreated
-          //       )
-          //     : this.textareaService.getContextmenuForText(
-          //         message.data as ITextCreated
-          //       ),
+          // contextmenu: this.elementService.getContextmenu(
+          //   message.data.element_id
+          // ),
+          contextmenu:
+            this.currentRoom.elements[message.data.element_id]?.type ===
+              'dice' || message.data?.type === 'dice'
+              ? this.diceService.getContextmenuForDice(
+                  message.data as IDiceCreated
+                )
+              : this.textareaService.getContextmenuForText(
+                  message.data as ITextCreated
+                ),
         };
         this.updateRoomValue();
       }

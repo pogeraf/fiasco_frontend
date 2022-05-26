@@ -10,14 +10,18 @@
     align-items: center;
     justify-content: space-around;
     &:after {
-      display: block;
+      content: "";
+      width: 3px;
+      height: 100px;
+
       position: absolute;
       left: 16%;
       top: 30px;
-      width: 3px;
-      height: 100px;
+
+      display: block;
+
       background: rgb(0,0,0);
-      content: "";
+
       transition: .2s height;
     }
 
@@ -33,9 +37,10 @@
 
       position: relative;
 
-      user-select: none;
       text-align: center;
+
       cursor: not-allowed;
+      user-select: none;
 
       span {
         height: 20px;
@@ -51,8 +56,9 @@
         position: absolute;
         bottom: -10px;
         left: 5px;
-        font-size: 10px;
+
         color: black;
+        font-size: 10px;
       }
     }
 
@@ -81,6 +87,7 @@
 
   &__d {
     margin: 0 25px;
+
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -98,15 +105,17 @@
         text-align: center;
       }
     }
-    button[type = 'submit'] {
-      text-align: center;
+
+    .button {
       width: 80px;
       height: 25px;
-      border: solid;
 
-      &:hover {
-        background: lightgreen !important;
-        color: rgba(100, 100, 100) !important;
+      text-align: center;
+
+      transition-delay: unset;
+
+      &.button-accept {
+        border: solid;
       }
     }
   }

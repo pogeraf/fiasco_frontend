@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ElementDirective } from '../element.directive';
+import { ITextCreated } from '../../../current-room.interface';
 
 @Component({
   selector: 'app-card-with-text',
@@ -7,17 +8,32 @@ import { ElementDirective } from '../element.directive';
   styleUrls: ['./card-with-text.component.scss'],
 })
 export class CardWithTextComponent extends ElementDirective implements OnInit {
+  @Input() override element: ITextCreated;
+
   public get textareaStyle() {
     const style = this.element.styles;
-
     return {
       background: this.styleService.colorArrayToStr(style.bg?.color),
-      border: this.styleService.borderObjToStr(style.border),
       borderRadius: this.styleService.sizeToStr(style.border?.radius),
       fontSize: this.styleService.sizeToStr(style.font?.size),
       color: this.styleService.colorArrayToStr(style.font?.color),
     };
   }
 
-  ngOnInit(): void {}
+  textValue: string;
+
+  ngOnInit(): void {
+    this.textValue = this.element.value;
+  }
+
+  save(): void {
+    this.textareaService.updateTextareaValue(
+      this.element.element_id,
+      this.textValue
+    );
+  }
+
+  cancel(): void {
+    this.textareaService.toggleEditingTextarea(this.element.element_id, false);
+  }
 }

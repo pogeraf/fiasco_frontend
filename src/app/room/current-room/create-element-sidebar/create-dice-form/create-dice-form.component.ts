@@ -14,7 +14,7 @@ export class CreateDiceFormComponent implements OnInit {
   @Output() createElement = new EventEmitter<IDice>();
 
   diceForm: FormGroup = new FormGroup({
-    type: new FormControl('', Validators.required),
+    type: new FormControl('dice', Validators.required),
     d: new FormControl(6, Validators.required),
     diceType: new FormControl('white', Validators.required),
     style: new FormControl(''),

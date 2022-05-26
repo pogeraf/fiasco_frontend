@@ -1,7 +1,7 @@
 .element {
-  cursor: grab;
-
   position: absolute;
+
+  cursor: grab;
 
   &:active {
     cursor: grabbing;

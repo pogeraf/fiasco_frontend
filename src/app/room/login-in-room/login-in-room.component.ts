@@ -24,9 +24,7 @@ export class LoginInRoomComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-    console.log(this.redirectTo);
-  }
+  ngOnInit(): void {}
 
   public setUserName() {
     this.userService.userName = this.form.get('name')?.value;

@@ -6,6 +6,7 @@ import { DiceComponent } from './element/dice/dice.component';
 import { CardWithTextComponent } from './element/card-with-text/card-with-text.component';
 import { ContextMenuComponent } from './element/context-menu/context-menu.component';
 import { ElementDirective } from './element/element.directive';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,6 @@ import { ElementDirective } from './element/element.directive';
     ElementDirective,
   ],
   exports: [BoardComponent],
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
 })
 export class BoardModule {}

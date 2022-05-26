@@ -19,10 +19,10 @@
   <!--  <div class="room-card-creating__members"> {{ newCard.usersInRoom }}/<input type="number"-->
   <!--                                                                             [(ngModel)]="newCard.maxUsers">-->
   <!--  </div>-->
-  <button (click)="create()" class="room-card-creating__create button-1">Join</button>
-  <button (click)="cancel()" class="room-card-creating__cancel button-1">Cancel</button>
-  <button class="room-card-creating__dev">Devtools</button>
-  <button (click)="generate()" class="room-card-creating__random">Random</button>
+  <button (click)="create()" class="room-card-creating__create button button-accept">Join</button>
+  <button (click)="cancel()" class="room-card-creating__cancel button button-reject">Cancel</button>
+  <button class="room-card-creating__dev button button-default">Devtools</button>
+  <button (click)="generate()" class="room-card-creating__random button button-default">Random</button>
 </div>
 
 <ng-template #mask>

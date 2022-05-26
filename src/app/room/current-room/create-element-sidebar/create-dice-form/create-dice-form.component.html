@@ -16,7 +16,7 @@
       <span>d: </span>
       <input type="number" formControlName="d">
     </p>
-    <button type="submit" class="button-1">Create!</button>
+    <button type="submit" class="button" [class]="diceForm.valid ? 'button-accept' : 'button-disable'" [disabled]="!diceForm.valid">Create!</button>
   </section>
 
   <section [class]="isCreating ? 'show' : 'hidden'" class="creating-dice-form__type">

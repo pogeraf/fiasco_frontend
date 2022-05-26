@@ -6,6 +6,8 @@ import {
   TCoordinates,
 } from '../../room/current-room/current-room.interface';
 import { ElementService } from '../element/element.service';
+import { EventTypes } from '../../global.interface';
+import { ApiService } from '../api/api.service';
 
 interface IDefaultTextElementOpt {
   text: string;
@@ -18,18 +20,36 @@ interface IDefaultTextElementOpt {
   providedIn: 'root',
 })
 export class TextareaService {
-  constructor(protected elementService: ElementService) {}
+  constructor(
+    protected elementService: ElementService,
+    private api: ApiService
+  ) {}
 
   getContextmenuForText(elem: ITextCreated): Array<IContextMenuItem> {
     return [
       {
-        name: 'Edit',
+        name: elem.isEditing ? 'Decline editing' : 'Edit',
         callback: () => {
-          this.elementService.updateElementValues(elem.element_id, '');
+          this.toggleEditingTextarea(elem.element_id, !elem.isEditing);
         },
       },
       ...this.elementService.getContextmenu(elem.element_id),
     ];
+  }
+
+  public toggleEditingTextarea(element_id: string, isEdit: boolean): void {
+    this.api.sendMessage(EventTypes.UPSERT_ELEMENT, {
+      element_id,
+      isEditing: isEdit,
+    });
+  }
+
+  public updateTextareaValue(element_id: string, data: string): void {
+    this.api.sendMessage(EventTypes.UPSERT_ELEMENT, {
+      element_id,
+      value: data,
+      isEditing: false,
+    });
   }
 
   public createTextElement(opt: IDefaultTextElementOpt): IText {

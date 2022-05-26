@@ -1,4 +1,4 @@
-<div class="context-menu" [style]="styles">
+<div class="context-menu" [style]="styles" (click)="close.emit()" (mouseup)="close.emit()">
   <p *ngFor="let item of items" (mouseup)="item.callback()" class="context-menu__item">
    <span>{{item.name}}</span>
   </p>

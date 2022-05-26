@@ -1,20 +1,17 @@
-
 .context-menu {
   width: 100px;
   height: auto;
   max-height: 200px;
 
-  overflow: auto;
-  user-select: none;
-
   position: absolute;
-
   left: 15px;
   top: 45px;
+  z-index: 1000;
 
   background: rgba(0, 0, 0, 0.8);
 
-  z-index: 1000;
+  overflow: auto;
+  user-select: none;
 
   &__item {
     width: 100%;
@@ -24,6 +21,8 @@
     align-items: center;
 
     color: white;
+
+
     cursor: pointer;
     transition: .3s;
 
