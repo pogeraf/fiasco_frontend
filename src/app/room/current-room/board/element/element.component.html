@@ -1,9 +1,15 @@
 <div class="element" [style]="elementPosition">
-  <div
+  <div #elementContent
     (mousedown)="isMoving ? startMovingElementById($event) : ''"
-    (contextmenu)="userService.userName === element.player ? showContextMenu($event) : deleteRightClickByElement($event)"
   >
     <ng-template  appCurrentElement></ng-template>
   </div>
-  <app-context-menu *ngIf="openContextmenu" (close)="closeContextMenu()" [items]="element.contextmenu" [position]="contextmenuPosition" [mouseCoordinates]="mouseCoordinatesByElement"></app-context-menu>
+  <app-context-menu
+    *ngIf="openContextmenu"
+    #contextMenuComponent
+    (close)="closeContextMenu()"
+    [items]="element.contextmenu"
+    [position]="contextMenuPosition"
+    [mouseCoordinates]="mouseCoordinatesByElement"
+  ></app-context-menu>
 </div>

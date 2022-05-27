@@ -1,4 +1,5 @@
 import {
+  AfterViewInit,
   Component,
   ElementRef,
   Input,
@@ -21,7 +22,11 @@ import { UserService } from '../../../../services/user/user.service';
   templateUrl: './element.component.html',
   styleUrls: ['./element.component.scss'],
 })
-export class ElementComponent implements OnInit, OnChanges {
+export class ElementComponent implements OnInit, OnChanges, AfterViewInit {
+  @ViewChild('elementContent') elementContent: ElementRef;
+  @ViewChild('contextMenuComponent', { read: ElementRef })
+  contextMenuComponent: ElementRef<HTMLElement>;
+
   @ViewChild(ElementDirective, { static: true })
   appCurrentElement: ElementDirective;
 
@@ -51,6 +56,13 @@ export class ElementComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     this.loadComponent();
+  }
+
+  ngAfterViewInit() {
+    this.elementContent.nativeElement.addEventListener(
+      'contextmenu',
+      this.showContextMenuHandler
+    );
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -114,39 +126,47 @@ export class ElementComponent implements OnInit, OnChanges {
     );
   }
 
-  deleteRightClickByElement(e: MouseEvent) {
+  deleteDefaultContextMenu(e: MouseEvent) {
     e.preventDefault();
   }
 
+  showContextMenuHandler = (e: MouseEvent) => this.showContextMenu(e);
+
   public showContextMenu(e: MouseEvent) {
-    this.deleteRightClickByElement(e);
+    this.deleteDefaultContextMenu(e);
     this.mouseCoordinatesByPage = [e.screenX, e.screenY];
     this.mouseCoordinatesByElement = [
       Math.abs(this.element.coordinates[0] - e.clientX),
       e.clientY - this.element.coordinates[1],
     ];
 
-    this.openContextmenu = !this.openContextmenu;
+    this.openContextmenu = true;
 
-    if (this.openContextmenu) {
-      setTimeout(() => {
-        document.addEventListener(
-          'mouseup',
-          (e: any) => {
-            e.preventDefault();
-            // TODO: hardcode
-            this.openContextmenu =
-              e.button === 2 && e?.path?.[4]?.tagName === 'APP-ELEMENT';
-          },
-          {
-            once: true,
-          }
-        );
-      }, 1000);
+    document.addEventListener('mousedown', this.interactContextMenuHandler);
+    this.elementContent.nativeElement.removeEventListener(
+      'contextmenu',
+      this.showContextMenuHandler
+    );
+  }
+
+  closeContextMenu() {
+    this.openContextmenu = false;
+    this.elementContent.nativeElement.addEventListener(
+      'contextmenu',
+      this.showContextMenuHandler
+    );
+    document.removeEventListener('mousedown', this.interactContextMenuHandler);
+  }
+
+  interactContextMenuHandler = (e: MouseEvent) => this.interactContextMenu(e);
+
+  public interactContextMenu(e: MouseEvent): void {
+    if (!e.composedPath().includes(this.contextMenuComponent.nativeElement)) {
+      this.closeContextMenu();
     }
   }
 
-  public get contextmenuPosition(): ['left' | 'right', 'top' | 'bottom'] {
+  public get contextMenuPosition(): ['left' | 'right', 'top' | 'bottom'] {
     return [
       this.mouseCoordinatesByPage[0] + ElementComponent.contextmenuSize[0] >
       window.screen.width
@@ -157,9 +177,5 @@ export class ElementComponent implements OnInit, OnChanges {
         ? 'top'
         : 'bottom',
     ];
-  }
-
-  public closeContextMenu(): void {
-    this.openContextmenu = false;
   }
 }
