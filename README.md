@@ -8,6 +8,7 @@ Designed for creating a room with canvas on that You can add elements and intera
 
 Designed by [_Daniel Ahmad_](https://github.com/pogeraf/) with the guidance
 by [_Fadi Ahmad_](https://github.com/fadich)
+by [_Waseem Ahmad_](https://github.com/Waseem9287)
 
 ## Running methods
 
