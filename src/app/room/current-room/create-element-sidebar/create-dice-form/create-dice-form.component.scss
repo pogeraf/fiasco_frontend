@@ -57,7 +57,7 @@
         bottom: -10px;
         left: 5px;
 
-        color: black;
+        color: $black;
         font-size: 10px;
       }
     }
@@ -98,7 +98,7 @@
         height: 15px;
 
         border: none;
-        border-bottom: 2px solid black;
+        border-bottom: 2px solid $black;
         border-radius: 4px;
 
         font-size: 15px;

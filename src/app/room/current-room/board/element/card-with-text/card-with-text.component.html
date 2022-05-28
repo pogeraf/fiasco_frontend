@@ -1,17 +1,17 @@
 <div
   class="block-with-text"
   [class]="{
-    'editing': element.isEditing && element.player === userService.userName,
-    'cursor-not-allowed': element.isEditing && !(element.player === userService.userName)
+    'editing': isEditing && isEditingPlayer,
+    'cursor-not-allowed': isEditing && !isEditingPlayer
     }"
   [style]="textareaStyle"
-  [style.border]="!element.isEditing ? styleService.borderObjToStr(element.styles.border) : ''"
+  [style.border]="!isEditing ? styleService.borderObjToStr(element.styles.border) : ''"
 >
-  <span *ngIf="!element.isEditing; else editing">{{ element.value }}</span>
+  <span *ngIf="!isEditing; else editing">{{ element.value }}</span>
 
   <ng-template #editing>
 
-    <span class="mask" *ngIf="!(element.player === userService.userName); else editingUser">{{ element.value }}</span>
+    <span class="mask" *ngIf="!isEditingPlayer; else editingUser">{{ element.value }}</span>
 
     <ng-template #editingUser>
       <button (click)="save()" class="button save" [class]="valueChanged ? 'button-default' : 'button-disable'" [disabled]="!valueChanged">Save</button>

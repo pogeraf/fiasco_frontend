@@ -14,7 +14,7 @@
   <section [class]="isCreating ? 'show' : 'hidden'" class="creating-dice-form__d">
     <p class="">
       <span>d: </span>
-      <input type="number" formControlName="d">
+      <input type="number" class="input-disable" value="6" disabled>
     </p>
     <button type="submit" class="button" [class]="diceForm.valid ? 'button-accept' : 'button-disable'" [disabled]="!diceForm.valid">Create!</button>
   </section>

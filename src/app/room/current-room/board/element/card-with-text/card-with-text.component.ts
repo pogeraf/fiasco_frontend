@@ -10,6 +10,14 @@ import { ITextCreated } from '../../../current-room.interface';
 export class CardWithTextComponent extends ElementDirective implements OnInit {
   @Input() override element: ITextCreated;
 
+  public get isEditing(): boolean {
+    return this.element?.editing?.isEditing;
+  }
+
+  public get isEditingPlayer(): boolean {
+    return this.element?.editing?.user === this.userService.userName;
+  }
+
   public get textareaStyle() {
     const style = this.element.styles;
     return {

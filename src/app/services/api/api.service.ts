@@ -1,17 +1,24 @@
 import { Injectable } from '@angular/core';
 import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
 import { IEventHandlers, EventTypes } from '../../global.interface';
+import { ModalService } from '../modal/modal.service';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ApiService {
-  // @ts-ignore
   protected ws: WebSocketSubject<any>;
+
+  protected connectErrorSource: BehaviorSubject<boolean> =
+    new BehaviorSubject<boolean>(false);
+  public connectError$: Observable<boolean> =
+    this.connectErrorSource.asObservable();
+  protected disconnectedManually = false;
 
   protected handlers: IEventHandlers = {} as IEventHandlers;
 
-  constructor() {}
+  constructor(protected modalService: ModalService) {}
 
   public connect(room: string, player: string): any {
     this.ws = webSocket(
@@ -23,13 +30,12 @@ export class ApiService {
           this.handlers[message.event](message);
         }
       },
-      (error) => {
-        console.log('***********************');
-        console.log(error);
-        console.log('***********************');
-        this.ws = webSocket(
-          `wss://api.fiasco.world/?room=${room}&player=${player}`
-        );
+      () => {
+        if (!this.disconnectedManually) {
+          this.connectErrorSource.next(true);
+        } else {
+          this.disconnectedManually = false;
+        }
       }
     );
   }
@@ -43,6 +49,7 @@ export class ApiService {
 
   public disconnect(): void {
     this.ws?.complete();
+    this.disconnectedManually = true;
   }
 
   public addEventHandler(event: EventTypes, call: CallableFunction) {

@@ -21,6 +21,7 @@ import {
 } from '../../global.interface';
 import { ElementService } from '../../services/element/element.service';
 import { TextareaService } from '../../services/textarea/textarea.service';
+import { ModalService } from '../../services/modal/modal.service';
 
 @Component({
   selector: 'app-room',
@@ -47,15 +48,16 @@ export class CurrentRoomComponent implements OnInit, OnDestroy {
   }
 
   constructor(
-    private activatedRoute: ActivatedRoute,
-    private router: Router,
-    private currentRoomService: CurrentRoomService,
-    private api: ApiService,
-    private diceService: DiceService,
-    private userService: UserService,
-    private mobile: MobileService,
-    private elementService: ElementService,
-    private textareaService: TextareaService
+    protected activatedRoute: ActivatedRoute,
+    protected router: Router,
+    protected currentRoomService: CurrentRoomService,
+    protected api: ApiService,
+    protected diceService: DiceService,
+    protected userService: UserService,
+    protected mobile: MobileService,
+    protected elementService: ElementService,
+    protected textareaService: TextareaService,
+    protected modalService: ModalService
   ) {
     this.isMobile$ = mobile.isMobile$;
     activatedRoute.params.subscribe((params) => {
@@ -70,6 +72,11 @@ export class CurrentRoomComponent implements OnInit, OnDestroy {
       });
       this.initHandler();
     }
+    this.api.connectError$.subscribe((data) => {
+      if (data) {
+        this.modalService.openReconnectModal();
+      }
+    });
   }
 
   ngOnDestroy(): void {

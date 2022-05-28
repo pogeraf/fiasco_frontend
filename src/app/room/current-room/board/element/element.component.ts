@@ -63,12 +63,14 @@ export class ElementComponent implements OnInit, OnChanges, AfterViewInit {
       'contextmenu',
       this.showContextMenuHandler
     );
+    // @ts-ignore
+    this.isMoving = !this.element?.editing?.isEditing;
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     this.loadComponent();
     // @ts-ignore
-    this.isMoving = !this.element?.isEditing;
+    this.isMoving = !this.element?.editing?.isEditing;
   }
 
   loadComponent() {

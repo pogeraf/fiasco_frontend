@@ -8,6 +8,7 @@ import {
 import { ElementService } from '../element/element.service';
 import { EventTypes } from '../../global.interface';
 import { ApiService } from '../api/api.service';
+import { UserService } from '../user/user.service';
 
 interface IDefaultTextElementOpt {
   text: string;
@@ -22,15 +23,19 @@ interface IDefaultTextElementOpt {
 export class TextareaService {
   constructor(
     protected elementService: ElementService,
-    private api: ApiService
+    private api: ApiService,
+    protected userService: UserService
   ) {}
 
   getContextmenuForText(elem: ITextCreated): Array<IContextMenuItem> {
     return [
       {
-        name: elem.isEditing ? 'Decline editing' : 'Edit',
+        name: elem.editing?.isEditing ? 'Decline editing' : 'Edit',
         callback: () => {
-          this.toggleEditingTextarea(elem.element_id, !elem.isEditing);
+          this.toggleEditingTextarea(
+            elem.element_id,
+            !elem?.editing?.isEditing
+          );
         },
       },
       ...this.elementService.getContextmenu(elem.element_id),
@@ -40,7 +45,10 @@ export class TextareaService {
   public toggleEditingTextarea(element_id: string, isEdit: boolean): void {
     this.api.sendMessage(EventTypes.UPSERT_ELEMENT, {
       element_id,
-      isEditing: isEdit,
+      editing: {
+        isEditing: isEdit,
+        user: this.userService.userName,
+      },
     });
   }
 
@@ -48,7 +56,7 @@ export class TextareaService {
     this.api.sendMessage(EventTypes.UPSERT_ELEMENT, {
       element_id,
       value: data,
-      isEditing: false,
+      editing: {},
     });
   }
 

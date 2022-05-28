@@ -39,7 +39,6 @@ export class ElementService {
   }
 
   public deleteElement(id: string) {
-    console.log(id);
     this.api.sendMessage(EventTypes.DELETE_ELEMENT, { element_id: id });
   }
 

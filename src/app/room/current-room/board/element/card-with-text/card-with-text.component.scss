@@ -1,3 +1,5 @@
+@import "src/styles";
+
 .block-with-text {
   width: 150px;
   height: 65px;
@@ -5,7 +7,7 @@
   position: absolute;
   z-index: 10;
 
-  background: white;
+  background: $white;
 
   border: 2px solid;
 
@@ -42,7 +44,7 @@
 
         background-color: rgba(0, 0, 0, 0);
 
-        color: black;
+        color: $black;
         font-size: 10px;
 
         transition: width 0.5s;
@@ -61,7 +63,7 @@
 
         background-color: rgba(0, 0, 0, 0.55);
 
-        color: white;
+        color: $white;
 
         transition: width 0.5s;
       }
@@ -82,7 +84,7 @@
   }
 
   textarea {
-    border: 2px solid black;
+    border: 2px solid $black;
 
     font-size: 12px;
     resize: none;
@@ -103,11 +105,13 @@
     width: auto;
     height: auto;
 
+    background: $lightyellow;
+
     position: absolute;
     bottom: -15px;
     left: 85%;
 
-    color: black;
+    color: $black;
     font-size: 10px;
     white-space: nowrap;
     text-overflow: ellipsis;

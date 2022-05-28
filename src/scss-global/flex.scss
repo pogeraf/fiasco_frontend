@@ -1,0 +1,140 @@
+.flex {
+  display: flex;
+}
+
+
+// Align items
+
+.align-items-center {
+  align-items: center;
+}
+
+.align-items-start {
+  align-items: flex-start;
+}
+
+.align-items-end {
+  align-items: flex-end;
+}
+
+
+// Justify content
+
+.justify-content-center {
+  justify-content: center;
+}
+
+.justify-content-around {
+  justify-content: space-around;
+}
+
+.justify-content-between {
+  justify-content: space-between;
+}
+
+.justify-content-start {
+  justify-content: flex-start;
+}
+
+.justify-content-end {
+  justify-content: flex-end;
+}
+
+
+// Display: flex; Align-items: center
+
+.fcc {
+  @extend .flex;
+  @extend .align-items-center;
+  @extend .justify-content-center;
+}
+
+.fca {
+  @extend .flex;
+  @extend .align-items-center;
+  @extend .justify-content-around;
+}
+
+.fcb {
+  @extend .flex;
+  @extend .align-items-center;
+  @extend .justify-content-between;
+}
+
+.fcs {
+  @extend .flex;
+  @extend .align-items-center;
+  @extend .justify-content-start;
+}
+
+.fce {
+  @extend .flex;
+  @extend .align-items-center;
+  @extend .justify-content-end;
+}
+
+
+// Display: flex; Align-items: start
+
+.fsc {
+  @extend .flex;
+  @extend .align-items-start;
+  @extend .justify-content-center;
+}
+
+.fsa {
+  @extend .flex;
+  @extend .align-items-start;
+  @extend .justify-content-around;
+}
+
+.fsb {
+  @extend .flex;
+  @extend .align-items-start;
+  @extend .justify-content-between;
+}
+
+.fss {
+  @extend .flex;
+  @extend .align-items-start;
+  @extend .justify-content-start;
+}
+
+.fse {
+  @extend .flex;
+  @extend .align-items-start;
+  @extend .justify-content-end;
+}
+
+
+// Display: flex; Align-items: end
+
+.fec {
+  @extend .flex;
+  @extend .align-items-end;
+  @extend .justify-content-center;
+}
+
+.fea {
+  @extend .flex;
+  @extend .align-items-end;
+  @extend .justify-content-around;
+}
+
+.feb {
+  @extend .flex;
+  @extend .align-items-end;
+  @extend .justify-content-between;
+}
+
+.fes {
+  @extend .flex;
+  @extend .align-items-end;
+  @extend .justify-content-start;
+}
+
+.fee {
+  @extend .flex;
+  @extend .align-items-end;
+  @extend .justify-content-end;
+}

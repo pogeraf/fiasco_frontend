@@ -48,9 +48,9 @@
       overflow: auto;
 
       &.black {
-        background: black;
+        background: $black;
 
-        color: white;
+        color: $white;
       }
 
       &::-webkit-scrollbar {
@@ -82,7 +82,7 @@
       width: 150px;
       height: 70px;
 
-      border: 2px solid black;
+      border: 2px solid $black;
 
       font-size: 12px;
       resize: none;
