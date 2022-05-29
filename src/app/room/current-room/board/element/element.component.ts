@@ -137,9 +137,13 @@ export class ElementComponent implements OnInit, OnChanges, AfterViewInit {
   public showContextMenu(e: MouseEvent) {
     this.deleteDefaultContextMenu(e);
     this.mouseCoordinatesByPage = [e.screenX, e.screenY];
+    // this.mouseCoordinatesByElement = [
+    //   Math.abs(this.element.coordinates[0] - e.clientX),
+    //   e.clientY - this.element.coordinates[1],
+    // ];
     this.mouseCoordinatesByElement = [
-      Math.abs(this.element.coordinates[0] - e.clientX),
-      e.clientY - this.element.coordinates[1],
+      Math.abs(this.element.coordinates[0] - e.pageX),
+      Math.abs(this.element.coordinates[1] - e.pageY),
     ];
 
     this.openContextmenu = true;

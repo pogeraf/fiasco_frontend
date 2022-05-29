@@ -36,5 +36,7 @@ export class ContextMenuComponent implements OnInit {
   }
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log(this.mouseCoordinates);
+  }
 }
